@@ -1,0 +1,24 @@
+/* Custom font-family utilities */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6; /* A light grey background for the main content area */
+}
+
+.font-serif-display {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Styles for the Management pages */
+.management-page {
+    background-image: url('../assets/clerkbackground.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.management-header {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}

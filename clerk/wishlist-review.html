@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist Review</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter (sans-serif) and Playfair Display (serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="css/style-clerk.css">
+</head>
+<body class="management-page">
+
+    <!-- Header -->
+    <header class="bg-[#345677] text-white p-4 flex justify-between items-center shadow-md">
+        <div class="flex items-center gap-3">
+            <div class="bg-white p-2 rounded-md">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#345677" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            </div>
+            <h1 class="font-serif-display text-2xl">MENORA</h1>
+        </div>
+        <h2 class="text-2xl font-bold uppercase tracking-wider">Wishlist Review</h2>
+        <a href="dashboardclerk.html" class="text-white hover:text-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="p-8">
+        <!-- Container for both sections -->
+        <div id="main-container" class="bg-white/90 p-6 rounded-2xl shadow-lg grid grid-cols-1 gap-8">
+            
+            <!-- Wishlist Books Section -->
+            <div id="wishlist-section">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Wishlist books</h3>
+                <!-- Scrollable container for the wishlist table -->
+                <div class="h-[calc(100vh-22rem)] overflow-y-auto border border-gray-200 rounded-lg pr-2">
+                    <table class="min-w-full">
+                        <thead class="sticky top-0 bg-gray-100">
+                            <tr class="border-b-2 border-gray-300">
+                                <th class="text-left py-3 px-4 font-semibold text-gray-700">Book Name</th>
+                                <th class="text-left py-3 px-4 font-semibold text-gray-700">Author</th>
+                                <th class="text-left py-3 px-4 font-semibold text-gray-700"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data attributes are added to each row to hold book info -->
+                            <tr class="wishlist-item border-b border-gray-200 bg-white" data-title="7 Penantian" data-author="Alyn">
+                                <td class="py-3 px-4">7 Penantian</td>
+                                <td class="py-3 px-4">Alyn</td>
+                                <td class="py-3 px-4">
+                                    <button class="edit-btn text-blue-500 hover:text-blue-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="wishlist-item border-b border-gray-200 bg-white" data-title="The Midnight Library" data-author="Matt Haig">
+                                <td class="py-3 px-4">The Midnight Library</td>
+                                <td class="py-3 px-4">Matt Haig</td>
+                                <td class="py-3 px-4">
+                                    <button class="edit-btn text-blue-500 hover:text-blue-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="wishlist-item border-b border-gray-200 bg-white" data-title="Klara and the Sun" data-author="Kazuo Ishiguro">
+                                <td class="py-3 px-4">Klara and the Sun</td>
+                                <td class="py-3 px-4">Kazuo Ishiguro</td>
+                                <td class="py-3 px-4">
+                                    <button class="edit-btn text-blue-500 hover:text-blue-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Add Book Section (hidden by default) -->
+            <div id="add-book-section" class="hidden">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Add book</h3>
+                <form class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="book-id" class="block text-sm font-medium text-gray-700">Book ID</label>
+                            <input type="text" id="book-id" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
+                        </div>
+                        <div>
+                            <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                            <input type="text" id="price" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                        <input type="text" id="title-input" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="author" class="block text-sm font-medium text-gray-700">Author</label>
+                            <input type="text" id="author-input" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
+                        </div>
+                        <div>
+                            <label for="year-publish" class="block text-sm font-medium text-gray-700">Year Publish</label>
+                            <input type="text" id="year-publish" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
+                        </div>
+                    </div>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="page-number" class="block text-sm font-medium text-gray-700">Page Number</label>
+                            <input type="text" id="page-number" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
+                        </div>
+                        <div>
+                            <label for="genre" class="block text-sm font-medium text-gray-700">Genre</label>
+                            <input type="text" id="genre" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="publisher" class="block text-sm font-medium text-gray-700">Publisher</label>
+                        <input type="text" id="publisher" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
+                    </div>
+                    <div class="text-right pt-4">
+                        <button type="submit" class="bg-green-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-600 transition-colors">Available</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // --- JavaScript to handle the interaction ---
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all the necessary elements
+            const editButtons = document.querySelectorAll('.edit-btn');
+            const addBookSection = document.getElementById('add-book-section');
+            const mainContainer = document.getElementById('main-container');
+            
+            // Get form inputs
+            const titleInput = document.getElementById('title-input');
+            const authorInput = document.getElementById('author-input');
+
+            // Add a click event listener to each edit button
+            editButtons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    // Find the parent row of the clicked button
+                    const itemRow = event.currentTarget.closest('.wishlist-item');
+                    
+                    // Get the book data from the data attributes
+                    const title = itemRow.dataset.title;
+                    const author = itemRow.dataset.author;
+
+                    // Populate the form with the book data
+                    titleInput.value = title;
+                    authorInput.value = author;
+                    
+                    // Show the "Add book" section
+                    addBookSection.classList.remove('hidden');
+
+                    // Change the grid layout to show two columns
+                    mainContainer.classList.remove('lg:grid-cols-1');
+                    mainContainer.classList.add('lg:grid-cols-2');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

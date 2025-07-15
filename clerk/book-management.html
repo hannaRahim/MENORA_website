@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Book</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter (sans-serif) and Playfair Display (serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="css/style-clerk.css">
+</head>
+<body class="management-page">
+
+    <!-- Header -->
+    <header class="bg-[#345677] text-white p-4 flex justify-between items-center shadow-md">
+        <div class="flex items-center gap-3">
+            <div class="bg-white p-2 rounded-md">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#345677" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            </div>
+            <h1 class="font-serif-display text-2xl">MENORA</h1>
+        </div>
+        <h2 class="text-2xl font-bold uppercase tracking-wider">Manage Book</h2>
+        <a href="dashboardclerk.html" class="text-white hover:text-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="p-8">
+        <div class="bg-white/90 p-6 rounded-2xl shadow-lg">
+            <!-- Search Bar -->
+            <div class="relative mb-6 w-full max-w-sm">
+                <input type="text" placeholder="search" class="w-full py-2 pl-4 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#345677]">
+                <button class="absolute right-0 top-0 mt-1 mr-1 bg-[#345677] text-white p-2 rounded-full hover:bg-[#2c4863]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full">
+                    <thead>
+                        <tr class="bg-gray-200/90">
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Title</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Author</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Publisher</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Genre</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4">Hey Mr Crush</td>
+                            <td class="py-3 px-4">Zati Mohamed</td>
+                            <td class="py-3 px-4">Kejou Book Pub.</td>
+                            <td class="py-3 px-4">Romance</td>
+                            <td class="py-3 px-4">
+                                <button class="text-red-500 hover:text-red-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- More book rows can be added here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
