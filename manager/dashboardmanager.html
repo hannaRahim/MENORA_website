@@ -17,13 +17,20 @@
     <link rel="stylesheet" href="css/style-manager.css">
 
     <style>
-        html { scroll-behavior: smooth; }
         /* Custom style for preview tables */
         .preview-table { width: 100%; border-collapse: collapse; }
         .preview-table th, .preview-table td { text-align: left; padding: 12px 8px; border-bottom: 1px solid #e5e7eb; }
         .preview-table th { font-weight: 600; color: #374151; font-size: 0.875rem; }
         .preview-table td { color: #4b5563; }
         .preview-table tr:last-child td { border-bottom: none; }
+        
+        /* Style for the active navigation link */
+        .nav-link.active {
+            background-color: white;
+            color: #345677;
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
     </style>
 
 </head>
@@ -44,10 +51,10 @@
                 <!-- Navigation -->
                 <nav>
                     <ul>
-                        <li><a href="#" class="flex items-center gap-4 px-4 py-3 bg-white text-[#345677] font-semibold rounded-lg shadow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg><span>Dashboard</span></a></li>
-                        <li class="mt-2"><a href="./manage-clerk.html" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg><span>Manage Clerk</span></a></li>
-                        <li class="mt-2"><a href="./user-activity.html" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg><span>User Activity</span></a></li>
-                        <li class="mt-2"><a href="./generate-report.html" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg><span>Generate Report</span></a></li>
+                        <li><a href="#dashboard-top" class="nav-link flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg><span>Dashboard</span></a></li>
+                        <li class="mt-2"><a href="#manage-clerk-preview" class="nav-link flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg><span>Manage Clerk</span></a></li>
+                        <li class="mt-2"><a href="#user-activity-preview" class="nav-link flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg><span>User Activity</span></a></li>
+                        <li class="mt-2"><a href="#generate-report-preview" class="nav-link flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg><span>Generate Report</span></a></li>
                         <li class="mt-2"><a href="#" id="logout-link" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg><span>Log out</span></a></li>
                     </ul>
                 </nav>
@@ -61,37 +68,37 @@
         <!-- ===== Sidebar End ===== -->
 
         <!-- ===== Content Area Start ===== -->
-        <main class="flex-1 p-8 overflow-y-auto">
+        <main class="flex-1 p-8 overflow-y-auto" style="scroll-behavior: smooth;">
             <!-- Stat Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div id="dashboard-top" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Card 1: New Sign Up -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm h-40 flex flex-col justify-between">
                     <h3 class="text-lg font-semibold text-[#345677]">New Sign Up</h3>
-                    <div class="flex justify-end items-end gap-4">
-                        <div>
-                            <p id="new-sign-ups" class="text-5xl font-bold text-gray-800">0</p>
+                    <div class="flex justify-between items-end gap-4">
+                        <div class="flex-grow">
+                            <p id="new-sign-up-stat" class="text-5xl font-bold text-gray-800 text-right">0</p>
                         </div>
-                        <img src="../assets/newsignup.png" alt="New Sign Up Icon" class="h-20 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x100/345677/FFFFFF?text=Img';">
+                        <img src="../assets/newsignup.png" alt="New Sign Up Icon" class="h-20 w-auto flex-shrink-0" onerror="this.onerror=null;this.src='https://placehold.co/80x80/345677/FFFFFF?text=Img';">
                     </div>
                 </div>
                 <!-- Card 2: Active Readers -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm h-40 flex flex-col justify-between">
                     <h3 class="text-lg font-semibold text-[#345677]">Active Readers</h3>
-                     <div class="flex justify-end items-end gap-4">
-                        <div>
-                            <p id="active-readers" class="text-5xl font-bold text-gray-800">0</p>
+                     <div class="flex justify-between items-end gap-4">
+                        <div class="flex-grow">
+                            <p id="active-readers-stat" class="text-5xl font-bold text-gray-800 text-right">0</p>
                         </div>
-                        <img src="../assets/activereader.png" alt="Active Readers Icon" class="h-20 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x100/345677/FFFFFF?text=Img';">
+                        <img src="../assets/activereader.png" alt="Active Readers Icon" class="h-20 w-auto flex-shrink-0" onerror="this.onerror=null;this.src='https://placehold.co/80x80/345677/FFFFFF?text=Img';">
                     </div>
                 </div>
                 <!-- Card 3: Books Added -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm h-40 flex flex-col justify-between">
                     <h3 class="text-lg font-semibold text-[#345677]">Books Added</h3>
-                     <div class="flex justify-end items-end gap-4">
-                        <div>
-                            <p id="books-added" class="text-5xl font-bold text-gray-800">0</p>
+                     <div class="flex justify-between items-end gap-4">
+                        <div class="flex-grow">
+                            <p id="books-added-stat" class="text-5xl font-bold text-gray-800 text-right">0</p>
                         </div>
-                        <img src="../assets/booksadded.png" alt="Books Added Icon" class="h-20 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x100/345677/FFFFFF?text=Img';">
+                        <img src="../assets/booksadded.png" alt="Books Added Icon" class="h-20 w-auto flex-shrink-0" onerror="this.onerror=null;this.src='https://placehold.co/80x80/345677/FFFFFF?text=Img';">
                     </div>
                 </div>
             </div>
@@ -102,14 +109,14 @@
                     <h2 class="text-xl font-bold text-gray-800">Manage Clerk</h2>
                     <a href="./manage-clerk.html" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</a>
                 </div>
-                <div id="clerk-preview-content" class="text-center text-gray-400 py-16"><p>Loading clerk data...</p></div>
+                <div id="clerk-preview-content"><p class="text-center text-gray-400 py-16">Loading clerk data...</p></div>
             </div>
             <div id="user-activity-preview" class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-gray-800">Recent User Activity</h2>
                     <a href="./user-activity.html" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</a>
                 </div>
-                <div id="activity-preview-content" class="text-center text-gray-400 py-16"><p>Loading user activity...</p></div>
+                <div id="activity-preview-content"><p class="text-center text-gray-400 py-16">Loading user activity...</p></div>
             </div>
             <div id="generate-report-preview" class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-center mb-4">
@@ -122,14 +129,8 @@
         <!-- ===== Content Area End ===== -->
     </div>
 
-    <!-- Supabase Client Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <!-- Custom Supabase Manager Script -->
-    <script src="manager-script.js"></script>
-
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
+        document.addEventListener('DOMContentLoaded', () => {
             // Check for logged in user
             const userString = localStorage.getItem('loggedInUser');
             if (!userString) {
@@ -151,19 +152,34 @@
                 </div>
             `;
 
-            // --- 1. Fetch and display dashboard STATS ---
-            const stats = await getDashboardStats();
-            document.getElementById('new-sign-ups').textContent = stats.newSignUps;
-            document.getElementById('active-readers').textContent = stats.activeReaders;
-            document.getElementById('books-added').textContent = stats.booksAdded;
+             // --- MOCK DATA ---
+            const mockUsers = [
+                { name: 'Aina Zahra', email: 'aina.zahra01@example.com', role: 'clerk', created_at: '2025-06-02' },
+                { name: 'Ikhwan Zulkifli', email: 'ikhwan.zul@example.com', role: 'clerk', created_at: '2025-06-04' },
+                { name: 'Syafiq Roslan', email: 'syafiq.roslan@example.com', role: 'clerk', created_at: '2025-06-05' },
+                { name: 'Wani Nabilah', email: 'wani.nabilah@example.com', role: 'clerk', created_at: '2025-06-06' },
+                { name: 'Khairul Amir', email: 'khairul.amir@example.com', role: 'clerk', created_at: '2025-06-08' },
+                { name: 'Farah Adlina', email: 'farah.adlina@example.com', role: 'reader', created_at: '2025-05-01' },
+                { name: 'Zikri Hazwan', email: 'zikri.hazwan@example.com', role: 'reader', created_at: '2025-05-03' },
+                { name: 'Nadira Sofia', email: 'nadira.sofia@example.com', role: 'reader', created_at: '2025-05-04' },
+                { name: 'Danish Faheem', email: 'danish.faheem@example.com', role: 'reader', created_at: '2025-05-05' }
+            ];
+            const mockBooks = [ { title: 'CINTA VERSI DIA' }, { title: 'EX SKANDAL SEBELAH RUMAH' }, { title: 'SAYANG' }, { title: 'THANKS BOSS' }, { title: 'KAHWIN BFF' }, { title: 'MY500K HUSBAND' }, { title: 'KAY : BUKAN SATU MALAM' }, { title: 'TAKE CARE, TUAN' }, { title: 'IKAT HATI DIA' }, { title: 'CUKUP DIRINYA SAJA' }, { title: 'I LOVE YOU MORE' }, { title: 'DIYA ALDRISH : PENGHUJUNG DENDAM' }, { title: 'HATI YANG TERPILIH' }, { title: 'BAD LIAR' }, { title: 'ISTERI TAK DIANGGAP' }, { title: 'TUAN FARITH : SKANDAL TAK DIRANCANG' }, { title: 'LAURA ARDISA' }, { title: 'DEEJA FAHRI : BAHAGIA YANG KAU TUNDA' }, { title: 'UNTUK 5 HARI KAU DAN AKU' }, { title: 'TUAN PENJAGA CIK KESAYANGAN' }, { title: 'YANG PERNAH PERGI' }, { title: 'PEREMPUAN YANG TERLUKA' }, { title: 'CALON ISTERI TUAN HAIDER' }, { title: 'MY BAE.. TENGKU FAHD' }, { title: 'BERDOSAKAH AKU' }, { title: 'KAU MASIH KUCINTAI' }, { title: 'LURUHNYA CINTA DI BUMI KOREA' }, { title: 'YANG MENCINTAIKU' }, { title: 'LIZZY' }, { title: 'NOAH ALEXANDRO' }, { title: 'PADA SUATU HARI' }, { title: 'TOLONG CINTAI AKU' }, { title: 'JAUH CINTA LAGI' }, { title: 'OH SEPHIA' }, { title: 'TIDAK AKAN HILANG CINTAKU' }, { title: 'KAU YANG AKU MAHU' }, { title: 'BUNGALOVE" BUNGA CINTA' }, { title: 'BAHAGIA' }, { title: 'HELLO MR CEO' }, { title: 'KEKASIH LEBARAN' }, { title: 'TIKET KE NERAKA' }, { title: 'ATAS NAMA CINTA' }, { title: 'CINTA PERTAMA' }, { title: 'PATAH HATI' }, { title: 'TENTANG CINTA' }, { title: 'SEKEPING HATI DIBAWA BERLARI' }, { title: 'AKU BUKAN BONEKA' }, { title: 'CINTA UNTUK MELODI' }, { title: 'HEY MR CRUSH' }, { title: 'HEY MR BAD GUY' } ];
 
-            // --- 2. Fetch and display CLERK PREVIEW ---
+
+            // --- 1. Populate STAT CARDS ---
+            document.getElementById('new-sign-up-stat').textContent = 14;
+            document.getElementById('active-readers-stat').textContent = 1;
+            document.getElementById('books-added-stat').textContent = 415;
+
+
+            // --- 2. Populate MANAGE CLERK PREVIEW ---
             const clerkPreviewContainer = document.getElementById('clerk-preview-content');
-            const clerks = await getClerksPreview(4); // Get top 4 clerks
+            const clerks = mockUsers.filter(u => u.role === 'clerk').slice(0, 4);
             if (clerks.length > 0) {
-                let clerkHtml = '<table class="preview-table"><thead><tr><th>Name</th><th>Email</th></tr></thead><tbody>';
+                let clerkHtml = '<table class="preview-table"><thead><tr><th>Name</th><th>Email</th><th>Role</th></tr></thead><tbody>';
                 clerks.forEach(clerk => {
-                    clerkHtml += `<tr><td>${clerk.name || 'N/A'}</td><td>${clerk.email}</td></tr>`;
+                    clerkHtml += `<tr><td>${clerk.name}</td><td>${clerk.email}</td><td class="capitalize">${clerk.role}</td></tr>`;
                 });
                 clerkHtml += '</tbody></table>';
                 clerkPreviewContainer.innerHTML = clerkHtml;
@@ -171,16 +187,16 @@
                 clerkPreviewContainer.innerHTML = '<p class="text-center text-gray-500 py-10">No clerks found.</p>';
             }
 
-            // --- 3. Fetch and display ACTIVITY PREVIEW ---
+            // --- 3. Populate RECENT ACTIVITY PREVIEW ---
             const activityPreviewContainer = document.getElementById('activity-preview-content');
-            const activities = await getUserActivityPreview(4); // Get last 4 activities
-            if (activities.length > 0) {
+            const recentActivity = [...mockUsers].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 4);
+            if (recentActivity.length > 0) {
                 let activityHtml = '<table class="preview-table"><thead><tr><th>Name</th><th>Role</th><th>Sign Up Date</th></tr></thead><tbody>';
-                activities.forEach(activity => {
+                recentActivity.forEach(activity => {
                     activityHtml += `<tr>
-                        <td>${activity.name || 'N/A'}</td>
+                        <td>${activity.name}</td>
                         <td class="capitalize">${activity.role}</td>
-                        <td>${new Date(activity.created_at).toLocaleDateString()}</td>
+                        <td>${new Date(activity.created_at).toLocaleDateString('en-GB')}</td>
                     </tr>`;
                 });
                 activityHtml += '</tbody></table>';
@@ -188,11 +204,67 @@
             } else {
                 activityPreviewContainer.innerHTML = '<p class="text-center text-gray-500 py-10">No recent user activity.</p>';
             }
+            
+            // --- 4. Sidebar Navigation Logic ---
+            const mainContent = document.querySelector('main');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main > div[id]');
 
-            // Logout functionality
+            // Function for smooth scrolling
+            function smoothScroll(targetId) {
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    const topOffset = targetElement.offsetTop - mainContent.offsetTop;
+                    mainContent.scrollTo({
+                        top: topOffset,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            
+            // Add click listeners to nav links
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith("#")) {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        smoothScroll(href.substring(1));
+                    });
+                }
+            });
+
+            // Function to update active nav link based on scroll position
+            function updateActiveLink() {
+                let currentSectionId = sections[0].id;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - mainContent.offsetTop - 100; // Offset for better accuracy
+                    if (mainContent.scrollTop >= sectionTop) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    const linkHref = link.getAttribute('href');
+                    if (linkHref === `#${currentSectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Listen for scroll events on the main content area
+            mainContent.addEventListener('scroll', updateActiveLink);
+            
+            // Set the initial active link on load
+            updateActiveLink();
+
+
+            // --- 5. Logout functionality ---
             document.getElementById('logout-link').addEventListener('click', (e) => {
                 e.preventDefault();
-                logout();
+                localStorage.removeItem('loggedInUser');
+                window.location.href = './loginmanager.html';
             });
         });
     </script>

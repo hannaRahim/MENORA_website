@@ -15,11 +15,31 @@
 
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="css/style-manager.css">
+    <style>
+        /* Styles for printing */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .print-area, .print-area * {
+                visibility: visible;
+            }
+            .print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body class="management-page">
 
     <!-- Header -->
-    <header class="bg-[#345677] text-white p-4 flex justify-between items-center shadow-md">
+    <header class="bg-[#345677] text-white p-4 flex justify-between items-center shadow-md no-print">
         <div class="flex items-center gap-3">
             <div class="bg-white p-2 rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#345677" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
@@ -34,16 +54,16 @@
 
     <!-- Main Content -->
     <main class="p-8">
-        <div class="bg-white/90 p-6 rounded-2xl shadow-lg">
+        <div class="bg-white/90 p-6 rounded-2xl shadow-lg print-area">
             <!-- Filter Section -->
-            <div class="flex flex-wrap items-center gap-4 mb-6">
+            <div class="flex flex-wrap items-center gap-4 mb-6 no-print">
                 <!-- Role Dropdown -->
                 <div>
                     <label for="role-filter" class="block text-sm font-medium text-gray-700">User Role</label>
                     <select id="role-filter" name="role-filter" class="mt-1 block w-40 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-[#345677] focus:border-[#345677] sm:text-sm rounded-md">
-                        <option>All</option>
-                        <option>Clerk</option>
-                        <option>Reader</option>
+                        <option value="all">All</option>
+                        <option value="clerk">Clerk</option>
+                        <option value="reader">Reader</option>
                     </select>
                 </div>
                 <!-- Date Range -->
@@ -74,65 +94,117 @@
                     </thead>
                     <tbody id="activity-table-body">
                         <!-- Activity data will be loaded here -->
-                        <tr>
-                            <td colspan="4" class="text-center text-gray-500 py-16">
-                                <p>Apply filters to see user activity.</p>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
             
+            <!-- Print Button -->
+            <div class="text-right mt-6 no-print">
+                <button id="print-button" class="bg-green-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-600 transition-colors">Print</button>
+            </div>
         </div>
     </main>
-
-    <!-- Supabase Client Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <!-- Custom Supabase Manager Script -->
-    <script src="supabase-manager.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Check for logged in user
             if (!localStorage.getItem('loggedInUser')) {
-                window.location.href = './loginmanager.html'; // CORRECTED PATH
+                window.location.href = './loginmanager.html';
                 return;
             }
 
+            const mockUsers = [
+                // Clerks - June 2025
+                { name: 'Aina Zahra', email: 'aina.zahra01@example.com', role: 'clerk', created_at: '2025-06-02T00:00:00Z' },
+                { name: 'Ikhwan Zulkifli', email: 'ikhwan.zul@example.com', role: 'clerk', created_at: '2025-06-04T00:00:00Z' },
+                { name: 'Syafiq Roslan', email: 'syafiq.roslan@example.com', role: 'clerk', created_at: '2025-06-05T00:00:00Z' },
+                { name: 'Wani Nabilah', email: 'wani.nabilah@example.com', role: 'clerk', created_at: '2025-06-06T00:00:00Z' },
+                { name: 'Khairul Amir', email: 'khairul.amir@example.com', role: 'clerk', created_at: '2025-06-08T00:00:00Z' },
+                { name: 'Aisyah Hana', email: 'aisyah.hana@example.com', role: 'clerk', created_at: '2025-06-09T00:00:00Z' },
+                { name: 'Faiz Rahimi', email: 'faiz.rahimi@example.com', role: 'clerk', created_at: '2025-06-10T00:00:00Z' },
+                { name: 'Liyana Aziz', email: 'liyana.aziz@example.com', role: 'clerk', created_at: '2025-06-12T00:00:00Z' },
+                { name: 'Adam Zafran', email: 'adam.zafran@example.com', role: 'clerk', created_at: '2025-06-13T00:00:00Z' },
+                { name: 'Zulaikha Syahirah', email: 'zulaikha.syahirah@example.com', role: 'clerk', created_at: '2025-06-14T00:00:00Z' },
+                { name: 'Hakim Azim', email: 'hakim.azim@example.com', role: 'clerk', created_at: '2025-06-15T00:00:00Z' },
+                { name: 'Nor Afiqah', email: 'nor.afiqah@example.com', role: 'clerk', created_at: '2025-06-17T00:00:00Z' },
+                { name: 'Irfan Danish', email: 'irfan.danish@example.com', role: 'clerk', created_at: '2025-06-20T00:00:00Z' },
+                { name: 'Syazwani Huda', email: 'syazwani.huda@example.com', role: 'clerk', created_at: '2025-06-22T00:00:00Z' },
+                { name: 'Khalish Iqmal', email: 'khalish.iqmal@example.com', role: 'clerk', created_at: '2025-06-25T00:00:00Z' },
+                // Readers - May 2025
+                { name: 'Farah Adlina', email: 'farah.adlina@example.com', role: 'reader', created_at: '2025-05-01T00:00:00Z' },
+                { name: 'Zikri Hazwan', email: 'zikri.hazwan@example.com', role: 'reader', created_at: '2025-05-03T00:00:00Z' },
+                { name: 'Nadira Sofia', email: 'nadira.sofia@example.com', role: 'reader', created_at: '2025-05-04T00:00:00Z' },
+                { name: 'Danish Faheem', email: 'danish.faheem@example.com', role: 'reader', created_at: '2025-05-05T00:00:00Z' },
+                { name: 'Nurul Alisha', email: 'nurul.alisha@example.com', role: 'reader', created_at: '2025-05-07T00:00:00Z' },
+                { name: 'Haikal Idris', email: 'haikal.idris@example.com', role: 'reader', created_at: '2025-05-09T00:00:00Z' },
+                { name: 'Siti Marissa', email: 'siti.marissa@example.com', role: 'reader', created_at: '2025-05-12T00:00:00Z' },
+                { name: 'Firdaus Azhar', email: 'firdaus.azhar@example.com', role: 'reader', created_at: '2025-05-15T00:00:00Z' },
+                { name: 'Amalina Syuhada', email: 'amalina.syuhada@example.com', role: 'reader', created_at: '2025-05-19T00:00:00Z' },
+                { name: 'Rafiq Iman', email: 'rafiq.iman@example.com', role: 'reader', created_at: '2025-05-22T00:00:00Z' }
+            ];
+
             const filterBtn = document.getElementById('filter-btn');
+            const printBtn = document.getElementById('print-button');
             const activityTableBody = document.getElementById('activity-table-body');
 
-            filterBtn.addEventListener('click', async () => {
-                const role = document.getElementById('role-filter').value;
-                const startDate = document.getElementById('start-date').value;
-                const endDate = document.getElementById('end-date').value;
+            const renderUsers = (usersToRender) => {
+                activityTableBody.innerHTML = ''; // Clear previous results
 
-                activityTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-4">Loading activity...</td></tr>';
-
-                const filters = { role, startDate, endDate };
-                const activities = await getUserActivity(filters);
-
-                activityTableBody.innerHTML = ''; // Clear loading message
-
-                if (activities.length > 0) {
-                    activities.forEach(activity => {
+                if (usersToRender.length > 0) {
+                    usersToRender.forEach(user => {
                         const row = document.createElement('tr');
                         row.className = 'border-b border-gray-200';
                         row.innerHTML = `
-                            <td class="py-3 px-4">${activity.name || 'N/A'}</td>
-                            <td class="py-3 px-4">${activity.email}</td>
-                            <td class="py-3 px-4">${activity.role}</td>
-                            <td class="py-3 px-4">${new Date(activity.created_at).toLocaleDateString()}</td>
+                            <td class="py-3 px-4">${user.name || 'N/A'}</td>
+                            <td class="py-3 px-4">${user.email}</td>
+                            <td class="py-3 px-4 capitalize">${user.role}</td>
+                            <td class="py-3 px-4">${new Date(user.created_at).toLocaleDateString('en-GB')}</td>
                         `;
                         activityTableBody.appendChild(row);
                     });
                 } else {
-                    activityTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-4">No activity found for the selected filters.</td></tr>';
+                    activityTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-10 text-gray-500">No activity found for the selected filters.</td></tr>';
                 }
+            };
+
+            const applyFilters = () => {
+                const roleFilter = document.getElementById('role-filter').value;
+                const startDateValue = document.getElementById('start-date').value;
+                const endDateValue = document.getElementById('end-date').value;
+                
+                let filteredUsers = mockUsers;
+
+                // 1. Filter by role
+                if (roleFilter !== 'all') {
+                    filteredUsers = filteredUsers.filter(user => user.role === roleFilter);
+                }
+
+                // 2. Filter by start date
+                if (startDateValue) {
+                    const startDate = new Date(startDateValue);
+                    startDate.setHours(0, 0, 0, 0); // Set to start of the day
+                    filteredUsers = filteredUsers.filter(user => new Date(user.created_at) >= startDate);
+                }
+
+                // 3. Filter by end date
+                if (endDateValue) {
+                    const endDate = new Date(endDateValue);
+                    endDate.setHours(23, 59, 59, 999); // Set to end of the day
+                    filteredUsers = filteredUsers.filter(user => new Date(user.created_at) <= endDate);
+                }
+
+                renderUsers(filteredUsers);
+            };
+
+            // Event Listeners
+            filterBtn.addEventListener('click', applyFilters);
+            printBtn.addEventListener('click', () => {
+                window.print();
             });
+
+            // Initial Render
+            renderUsers(mockUsers); // Display all users initially
         });
     </script>
-
 </body>
 </html>
