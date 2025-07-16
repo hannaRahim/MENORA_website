@@ -330,12 +330,17 @@ function deleteWishlistItem(wishlistId, bookTitle) {
 }
 
 function populateAddBookForm(event) {
-    const itemRow = event.currentTarget.closest('.wishlist-item');
+    const itemRow = event.target.closest('.wishlist-item');
     const addBookSection = document.getElementById('add-book-section');
     const mainContainer = document.getElementById('main-container');
     currentWishlistItemId = itemRow.dataset.wishlistId;
     document.getElementById('title-input').value = itemRow.dataset.title;
     document.getElementById('author-input').value = itemRow.dataset.author;
+    
+    const nextId = await getNextEbookId();
+    bookIdInput.value = nextId;
+    bookIdInput.readOnly = true; 
+    
     addBookSection.classList.remove('hidden');
     mainContainer.classList.remove('lg:grid-cols-1');
     mainContainer.classList.add('lg:grid-cols-2');
