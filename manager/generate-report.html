@@ -59,21 +59,8 @@
                             <th class="w-1/5 text-left py-3 px-4 font-semibold text-gray-700">Created At</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="border-b border-gray-200">
-                            <td class="py-3 px-4">123</td>
-                            <td class="py-3 px-4">Suhana Rahim</td>
-                            <td class="py-3 px-4">shnrhm@gmail.com</td>
-                            <td class="py-3 px-4">Clerk</td>
-                            <td class="py-3 px-4">25/6/2025</td>
-                        </tr>
-                         <tr class="border-b border-gray-200">
-                            <td class="py-3 px-4">124</td>
-                            <td class="py-3 px-4">Iman Mysarah</td>
-                            <td class="py-3 px-4">imnsrh@gmail.com</td>
-                            <td class="py-3 px-4">Reader</td>
-                            <td class="py-3 px-4">15/6/2025</td>
-                        </tr>
+                    <tbody id="user-report-body">
+                        <!-- User data will be loaded here -->
                     </tbody>
                 </table>
             </div>
@@ -94,17 +81,8 @@
                             <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Price</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="border-b border-gray-200">
-                            <td class="py-3 px-4">BK-001</td>
-                            <td class="py-3 px-4">Hey Mr Crush</td>
-                            <td class="py-3 px-4">Zati Mohamed</td>
-                            <td class="py-3 px-4">Kejou Book Pub.</td>
-                            <td class="py-3 px-4">Romance</td>
-                            <td class="py-3 px-4">250</td>
-                            <td class="py-3 px-4">2023</td>
-                            <td class="py-3 px-4">$12.99</td>
-                        </tr>
+                    <tbody id="book-report-body">
+                        <!-- Book data will be loaded here -->
                     </tbody>
                 </table>
             </div>
@@ -116,28 +94,96 @@
         </div>
     </main>
 
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Custom Supabase Manager Script -->
+    <script src="supabase-manager.js"></script>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Check for logged in user
+            if (!localStorage.getItem('loggedInUser')) {
+                window.location.href = './loginmanager.html';
+                return;
+            }
+
             const reportTypeSelect = document.getElementById('report-type');
             const userReport = document.getElementById('user-report');
             const bookReport = document.getElementById('book-report');
+            const userReportBody = document.getElementById('user-report-body');
+            const bookReportBody = document.getElementById('book-report-body');
             const printButton = document.getElementById('print-button');
+
+            // --- Function to load user data ---
+            const loadUserReport = async () => {
+                userReportBody.innerHTML = '<tr><td colspan="5" class="text-center py-4">Loading...</td></tr>';
+                const users = await getUsersReport();
+                userReportBody.innerHTML = '';
+                if (users.length > 0) {
+                    users.forEach(user => {
+                        const row = document.createElement('tr');
+                        row.className = 'border-b border-gray-200';
+                        row.innerHTML = `
+                            <td class="py-3 px-4">${user.id}</td>
+                            <td class="py-3 px-4">${user.name || 'N/A'}</td>
+                            <td class="py-3 px-4">${user.email}</td>
+                            <td class="py-3 px-4">${user.role}</td>
+                            <td class="py-3 px-4">${new Date(user.created_at).toLocaleDateString()}</td>
+                        `;
+                        userReportBody.appendChild(row);
+                    });
+                } else {
+                    userReportBody.innerHTML = '<tr><td colspan="5" class="text-center py-4">No user data found.</td></tr>';
+                }
+            };
+
+            // --- Function to load book data ---
+            const loadBookReport = async () => {
+                bookReportBody.innerHTML = '<tr><td colspan="8" class="text-center py-4">Loading...</td></tr>';
+                const books = await getBooksReport();
+                bookReportBody.innerHTML = '';
+                if (books.length > 0) {
+                    books.forEach(book => {
+                        const row = document.createElement('tr');
+                        row.className = 'border-b border-gray-200';
+                        row.innerHTML = `
+                            <td class="py-3 px-4">${book.ebook_id}</td>
+                            <td class="py-3 px-4">${book.title}</td>
+                            <td class="py-3 px-4">${book.author || 'N/A'}</td>
+                            <td class="py-3 px-4">${book.publisher || 'N/A'}</td>
+                            <td class="py-3 px-4">${book.genre || 'N/A'}</td>
+                            <td class="py-3 px-4">${book.page_number || 'N/A'}</td>
+                            <td class="py-3 px-4">${book.year_published || 'N/A'}</td>
+                            <td class="py-3 px-4">${book.price ? `$${book.price.toFixed(2)}` : 'N/A'}</td>
+                        `;
+                        bookReportBody.appendChild(row);
+                    });
+                } else {
+                    bookReportBody.innerHTML = '<tr><td colspan="8" class="text-center py-4">No book data found.</td></tr>';
+                }
+            };
 
             // --- Event listener for the dropdown ---
             reportTypeSelect.addEventListener('change', function() {
                 if (this.value === 'user') {
                     userReport.classList.remove('hidden');
                     bookReport.classList.add('hidden');
+                    loadUserReport();
                 } else if (this.value === 'book') {
                     userReport.classList.add('hidden');
                     bookReport.classList.remove('hidden');
+                    loadBookReport();
                 }
             });
 
             // --- Event listener for the print button ---
-            printButton.addEventListener('click', function() {
+            printButton.addEventListener('click', () => {
                 window.print();
             });
+
+            // --- Initial Load ---
+            await loadUserReport();
         });
     </script>
 

@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In - Menora</title>
+    <title>Log In - Menora Manager</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Link to the minimalist stylesheet -->
     <link rel="stylesheet" href="css/style-minimalist.css">
@@ -23,7 +23,7 @@
             <!-- Header with Brand and Welcome Text -->
             <div class="login-header">
                 <h1 class="brand-title">Menora</h1>
-                <p class="welcome-text">Welcome back! Please log in to your account.</p>
+                <p class="welcome-text">Welcome back! Please log in to your Manager account.</p>
             </div>
 
             <!-- Role Toggle for Admin/Clerk -->
@@ -33,12 +33,12 @@
             </div>
 
             <!-- Login Form -->
-            <form class="login-form">
+            <form class="login-form" id="manager-login-form">
                 <div class="form-group">
                     <label for="email" class="form-label">Email</label>
                     <div class="input-wrapper">
                         <i data-feather="mail"></i>
-                        <input id="email" type="email" class="form-input" placeholder="you@example.com" required>
+                        <input id="email" type="email" class="form-input" placeholder="manager@example.com" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -52,29 +52,49 @@
                     <a href="#" class="forgot-password">Forgot password?</a>
                 </div>
                 <button type="submit" class="submit-button">Log In</button>
+                <p id="error-message" class="error-message text-red-500 text-center mt-4"></p>
             </form>
         </div>
     </div>
 
     <script>
-        // This script renders the icons (mail, lock)
+        // Initialize Feather Icons
         feather.replace();
 
-        // Form submission logic for the manager
-        document.querySelector('.login-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get references to the HTML elements
+            const loginForm = document.getElementById('manager-login-form');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const errorMessage = document.getElementById('error-message');
 
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            // Add an event listener for the form submission
+            loginForm.addEventListener('submit', async (event) => {
+                event.preventDefault(); // Prevent the default form submission
+                errorMessage.textContent = ''; // Clear any previous error messages
 
-            if (email && password) {
-                console.log('Login attempt as Admin. Redirecting to manager dashboard...');
-                // Redirect to the manager dashboard upon successful login
-                window.location.href = 'dashboardmanager.html';
-            } else {
-                // A simple validation message
-                alert('Please fill in both email and password.');
-            }
+                const email = emailInput.value;
+                const password = passwordInput.value;
+                const expectedRole = 'manager';
+
+                // For presentation purposes, check hardcoded credentials
+                if (email === "hannarahim@gmail.com" && password === "2003") {
+                    console.log("Manager login successful. Redirecting...");
+                    // Store user data in localStorage to simulate a logged-in session
+                    localStorage.setItem('loggedInUser', JSON.stringify({
+                        uid: 'Manager-uid-123', 
+                        email: email,
+                        name: 'Manager',
+                        role: expectedRole
+                    }));
+                    // Redirect to the manager dashboard
+                    window.location.href = 'dashboardmanager.html';
+                } else {
+                    // Display error for incorrect credentials
+                    errorMessage.textContent = 'Invalid email or password.';
+                    console.warn('Login failed: Incorrect credentials.');
+                }
+            });
         });
     </script>
 

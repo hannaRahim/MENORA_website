@@ -17,10 +17,7 @@
     <link rel="stylesheet" href="css/style-manager.css">
 
     <style>
-        /* Add smooth scrolling behavior as a fallback */
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
     </style>
 
 </head>
@@ -41,54 +38,18 @@
                 <!-- Navigation -->
                 <nav>
                     <ul>
-                        <!-- Dashboard Link (Active) -->
-                        <li>
-                            <a href="#" class="flex items-center gap-4 px-4 py-3 bg-white text-[#345677] font-semibold rounded-lg shadow">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <!-- Manage Clerk Link -->
-                        <li class="mt-2">
-                            <a href="#manage-clerk" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
-                                <span>Manage Clerk</span>
-                            </a>
-                        </li>
-                        <!-- User Activity Link -->
-                        <li class="mt-2">
-                            <a href="#user-activity" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                                <span>User Activity</span>
-                            </a>
-                        </li>
-                        <!-- Generate Report Link -->
-                        <li class="mt-2">
-                            <a href="#generate-report" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                                <span>Generate Report</span>
-                            </a>
-                        </li>
-                        <!-- Log out Link -->
-                        <li class="mt-2">
-                            <a href="loginmanager.html" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                                <span>Log out</span>
-                            </a>
-                        </li>
+                        <li><a href="#" class="flex items-center gap-4 px-4 py-3 bg-white text-[#345677] font-semibold rounded-lg shadow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg><span>Dashboard</span></a></li>
+                        <li class="mt-2"><a href="./manage-clerk.html" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg><span>Manage Clerk</span></a></li>
+                        <li class="mt-2"><a href="./user-activity.html" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg><span>User Activity</span></a></li>
+                        <li class="mt-2"><a href="./generate-report.html" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg><span>Generate Report</span></a></li>
+                        <li class="mt-2"><a href="#" id="logout-link" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg><span>Log out</span></a></li>
                     </ul>
                 </nav>
             </div>
 
             <!-- User Profile -->
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                    AD
-                </div>
-                <div>
-                    <p class="text-white font-semibold">Admin</p>
-                    <p class="text-white/70 text-sm">Aina2003@mail.com</p>
-                </div>
+            <div id="user-profile" class="flex items-center gap-4">
+                <!-- Profile content will be loaded here -->
             </div>
         </aside>
         <!-- ===== Sidebar End ===== -->
@@ -102,7 +63,7 @@
                     <h3 class="text-lg font-semibold text-[#345677]">New Sign Up</h3>
                     <div class="flex justify-end items-end gap-4">
                         <div>
-                            <p class="text-5xl font-bold text-gray-800">1,204</p>
+                            <p id="new-sign-ups" class="text-5xl font-bold text-gray-800">0</p>
                         </div>
                         <img src="../assets/newsignup.png" alt="New Sign Up Icon" class="h-20 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x100/345677/FFFFFF?text=Img';">
                     </div>
@@ -112,7 +73,7 @@
                     <h3 class="text-lg font-semibold text-[#345677]">Active Readers</h3>
                      <div class="flex justify-end items-end gap-4">
                         <div>
-                            <p class="text-5xl font-bold text-gray-800">893</p>
+                            <p id="active-readers" class="text-5xl font-bold text-gray-800">0</p>
                         </div>
                         <img src="../assets/activereader.png" alt="Active Readers Icon" class="h-20 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x100/345677/FFFFFF?text=Img';">
                     </div>
@@ -122,70 +83,78 @@
                     <h3 class="text-lg font-semibold text-[#345677]">Books Added</h3>
                      <div class="flex justify-end items-end gap-4">
                         <div>
-                            <p class="text-5xl font-bold text-gray-800">350</p>
+                            <p id="books-added" class="text-5xl font-bold text-gray-800">0</p>
                         </div>
                         <img src="../assets/booksadded.png" alt="Books Added Icon" class="h-20 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x100/345677/FFFFFF?text=Img';">
                     </div>
                 </div>
             </div>
 
-            <!-- Manage Clerk Section -->
-            <div id="manage-clerk" class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
+            <!-- Sections for Manage Clerk, User Activity, etc. remain the same -->
+            <div id="manage-clerk-preview" class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-gray-800">Manage Clerk</h2>
-                    <a href="manage-clerk.html" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</a>
+                    <a href="./manage-clerk.html" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</a>
                 </div>
-                <!-- Placeholder for clerk list -->
-                <div class="text-center text-gray-400 py-16">
-                    <p>Clerk management tools will be displayed here.</p>
-                </div>
+                <div class="text-center text-gray-400 py-16"><p>Clerk management tools will be displayed here.</p></div>
             </div>
-
-            <!-- User Activity Log Section -->
-            <div id="user-activity" class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
+            <div id="user-activity-preview" class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-gray-800">User Activity Log</h2>
-                    <a href="user-activity.html" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</a>
+                    <a href="./user-activity.html" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</a>
                 </div>
-                <!-- Placeholder for activity list -->
-                <div class="text-center text-gray-400 py-16">
-                    <p>User activity data will be displayed here.</p>
-                </div>
+                <div class="text-center text-gray-400 py-16"><p>User activity data will be displayed here.</p></div>
             </div>
-
-            <!-- Generate Report Section -->
-            <div id="generate-report" class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
+            <div id="generate-report-preview" class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-gray-800">Generate Report</h2>
-                    <a href="generate-report.html" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</a>
+                    <a href="./generate-report.html" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</a>
                 </div>
-                <!-- Placeholder for report list -->
-                <div class="text-center text-gray-400 py-16">
-                    <p>Report generation options will be displayed here.</p>
-                </div>
+                <div class="text-center text-gray-400 py-16"><p>Report generation options will be displayed here.</p></div>
             </div>
         </main>
         <!-- ===== Content Area End ===== -->
     </div>
 
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Custom Supabase Manager Script -->
+    <script src="supabase-manager.js"></script>
+
     <script>
-        // This script ensures smooth scrolling for anchor links in the navigation.
-        document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Check for logged in user
+            const userString = localStorage.getItem('loggedInUser');
+            if (!userString) {
+                window.location.href = './loginmanager.html'; // CORRECTED PATH
+                return;
+            }
+            const user = JSON.parse(userString);
 
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
+            // Populate User Profile
+            const userProfile = document.getElementById('user-profile');
+            const initials = user.name ? user.name.split(' ').map(n => n[0]).join('').toUpperCase() : 'AD';
+            userProfile.innerHTML = `
+                <div class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    ${initials}
+                </div>
+                <div>
+                    <p class="text-white font-semibold">${user.name || 'Admin'}</p>
+                    <p class="text-white/70 text-sm">${user.email}</p>
+                </div>
+            `;
 
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
+            // Fetch and display dashboard stats
+            const stats = await getDashboardStats();
+            document.getElementById('new-sign-ups').textContent = stats.newSignUps;
+            document.getElementById('active-readers').textContent = stats.activeReaders;
+            document.getElementById('books-added').textContent = stats.booksAdded;
+
+            // Logout functionality
+            document.getElementById('logout-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                logout();
             });
         });
     </script>

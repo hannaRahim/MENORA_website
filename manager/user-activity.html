@@ -27,7 +27,7 @@
             <h1 class="font-serif-display text-2xl">MENORA</h1>
         </div>
         <h2 class="text-2xl font-bold uppercase tracking-wider">User Activity</h2>
-        <a href="dashboardmanager.html" class="text-white hover:text-gray-200">
+        <a href="./dashboardmanager.html" class="text-white hover:text-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
         </a>
     </header>
@@ -57,17 +57,82 @@
                 </div>
                  <!-- Filter Button -->
                 <div class="self-end">
-                     <button class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">Filter</button>
+                     <button id="filter-btn" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">Filter</button>
                 </div>
             </div>
 
-            <!-- Placeholder for activity data -->
-            <div class="text-center text-gray-500 py-16">
-                <p>Activity data will be displayed here after filtering.</p>
+            <!-- Table for activity data -->
+            <div id="activity-data-container" class="overflow-x-auto">
+                <table class="min-w-full">
+                    <thead>
+                        <tr class="bg-gray-200/90">
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Name</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Email</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Role</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Sign Up Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="activity-table-body">
+                        <!-- Activity data will be loaded here -->
+                        <tr>
+                            <td colspan="4" class="text-center text-gray-500 py-16">
+                                <p>Apply filters to see user activity.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             
         </div>
     </main>
+
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Custom Supabase Manager Script -->
+    <script src="supabase-manager.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check for logged in user
+            if (!localStorage.getItem('loggedInUser')) {
+                window.location.href = './loginmanager.html'; // CORRECTED PATH
+                return;
+            }
+
+            const filterBtn = document.getElementById('filter-btn');
+            const activityTableBody = document.getElementById('activity-table-body');
+
+            filterBtn.addEventListener('click', async () => {
+                const role = document.getElementById('role-filter').value;
+                const startDate = document.getElementById('start-date').value;
+                const endDate = document.getElementById('end-date').value;
+
+                activityTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-4">Loading activity...</td></tr>';
+
+                const filters = { role, startDate, endDate };
+                const activities = await getUserActivity(filters);
+
+                activityTableBody.innerHTML = ''; // Clear loading message
+
+                if (activities.length > 0) {
+                    activities.forEach(activity => {
+                        const row = document.createElement('tr');
+                        row.className = 'border-b border-gray-200';
+                        row.innerHTML = `
+                            <td class="py-3 px-4">${activity.name || 'N/A'}</td>
+                            <td class="py-3 px-4">${activity.email}</td>
+                            <td class="py-3 px-4">${activity.role}</td>
+                            <td class="py-3 px-4">${new Date(activity.created_at).toLocaleDateString()}</td>
+                        `;
+                        activityTableBody.appendChild(row);
+                    });
+                } else {
+                    activityTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-4">No activity found for the selected filters.</td></tr>';
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
