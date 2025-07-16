@@ -2,54 +2,49 @@
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
-    overflow: hidden; /* Prevent scrollbars from the main layout */
 }
 
-/* --- Login Page Layout --- */
-.login-container {
-    display: flex;
-    min-height: 100vh;
-    width: 100vw;
-}
-
-/* --- Left Panel --- */
-.left-panel {
-    flex: 1;
-    background-color: #f7f5f2; /* cream-bg: hsl(35, 25%, 96%) */
-    position: relative;
+/* --- Login Page Styles --- */
+body:has(.login-container) {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    overflow: hidden;
+    background-color: #f0f4f8;
 }
 
-.svg-divider {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: -1px; /* Overlap slightly to prevent gaps */
-    width: 128px;
-    z-index: 10;
-}
-
-.svg-divider svg {
-    height: 100%;
+.login-container {
+    display: flex;
     width: 100%;
+    max-width: 1100px;
+    min-height: 75vh;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+/* --- Left Panel (Login) --- */
+.left-panel {
+    flex: 1;
+    background-color: #f7f5f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
 }
 
 .left-content {
-    position: relative;
-    z-index: 1;
     text-align: center;
-    padding: 2rem;
 }
 
 .brand-title {
     font-family: 'Playfair Display', serif;
-    font-size: 4.5rem; /* Adjusted for better fit */
-    color: #f5e67a; /* soft-yellow: hsl(45, 90%, 70%) */
+    font-size: 6.5rem; /* Enlarged */
+    color: #eec602;
     font-weight: 700;
-    letter-spacing: 0.05em;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.15);
 }
 
 .illustration-container {
@@ -58,136 +53,115 @@ body {
 }
 
 .notebook-image {
-    width: 320px;
-    height: 192px;
+    width: 380px; /* Enlarged */
+    height: auto;
     object-fit: contain;
-    opacity: 0.9;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.botanical-branch {
-    position: absolute;
-    width: 96px;
-    height: 96px;
-    object-fit: contain;
-    opacity: 0.7;
-    display: none; /* Hidden as no image was provided, can be enabled later */
-}
-
-.botanical-branch.top {
-    top: -1rem;
-    left: -2rem;
-    transform: rotate(12deg);
-}
-
-.botanical-branch.bottom {
-    bottom: -0.5rem;
-    right: -1.5rem;
-    width: 80px;
-    height: 80px;
-    transform: rotate(-45deg) scaleX(-1);
-}
-
-/* --- Right Panel --- */
+/* --- Right Panel (Login) --- */
 .right-panel {
     flex: 1;
-    background: linear-gradient(135deg, hsl(210 35% 88%) 0%, hsl(210 25% 85%) 50%, hsl(200 30% 90%) 100%);
-    position: relative;
+    background-color: #20527e; /* Updated color */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 3rem;
 }
 
 .login-form-wrapper {
     width: 100%;
     max-width: 380px;
-    padding: 2rem;
 }
 
-/* --- Toggle Buttons --- */
+/* --- Toggle Buttons (Login) --- */
 .login-toggle-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .login-toggle {
     display: inline-flex;
-    background-color: hsl(210, 25%, 90%); /* Lighter than watercolor-blue */
+    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 9999px;
-    padding: 0.25rem;
+    padding: 0.35rem;
 }
 
 .toggle-button {
-    padding: 0.5rem 1.5rem;
+    padding: 0.6rem 1.75rem;
     border-radius: 9999px;
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     font-weight: 500;
     text-decoration: none;
-    color: hsl(215.4, 16.3%, 46.9%);
+    color: hsl(210, 20%, 80%);
     transition: all 0.3s ease;
 }
 
-.toggle-button.active {
-    background-color: #0a3d70; /* dark-blue: hsl(210, 85%, 25%) */
-    color: #f8fafc; /* primary-foreground */
-    box-shadow: 0 4px 15px -5px hsl(210 85% 25% / 0.4);
+.toggle-button:hover:not(.active) {
+    transform: translateY(-3px); /* Moveable effect */
+    color: #ffffff;
 }
 
-/* --- Form Fields --- */
+.toggle-button.active {
+    background-color: #f7f5f2;
+    color: #20527e;
+    box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Form Fields (Login) --- */
 .login-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.75rem;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.5rem;
 }
 
 .form-label {
     font-size: 0.875rem;
     font-weight: 500;
-    color: #334155; /* Muted foreground */
+    color: hsl(210, 20%, 85%);
 }
 
 .form-input {
-    margin-top: 0.25rem;
-    background-color: #f7f5f2; /* cream-bg */
-    border: 1px solid hsl(210, 25%, 85%);
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
+    padding: 0.85rem 1rem;
     font-size: 1rem;
-    color: #020817;
+    color: #ffffff;
     transition: all 0.2s ease-in-out;
 }
 
 .form-input:focus {
     outline: none;
-    border-color: #0a3d70;
-    box-shadow: 0 0 0 2px hsl(210 85% 25% / 0.2);
+    border-color: #eec602;
+    box-shadow: 0 0 0 3px rgba(238, 198, 2, 0.3);
 }
 
 .submit-button {
-    background-color: #0a3d70; /* dark-blue */
-    color: #f8fafc;
-    padding: 0.75rem;
-    font-weight: 500;
+    background-color: #f7f5f2;
+    color: #20527e;
+    padding: 0.85rem;
+    font-weight: 600;
+    font-size: 1rem;
     border-radius: 0.5rem;
     border: none;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    margin-top: 1rem;
 }
 
 .submit-button:hover {
-    background-color: hsl(210, 85%, 30%);
+    background-color: #eec602;
+    transform: translateY(-2px);
 }
 
-/* --- Management Page Styles --- */
+/* --- Management Page Styles (from your original file) --- */
 .management-page {
     background-image: url('../assets/clerkbackground.jpg');
     background-size: cover;

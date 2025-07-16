@@ -16,6 +16,20 @@
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="css/style-clerk.css">
 
+    <style>
+        /* Fallback for smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Style for the active navigation link */
+        .nav-link.active {
+            background-color: white;
+            color: #345677;
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+    </style>
+
 </head>
 <body class="bg-gray-100">
 
@@ -33,31 +47,31 @@
 
                 <!-- Navigation -->
                 <nav>
-                    <ul>
-                        <!-- Dashboard Link (Active) -->
+                    <ul id="nav-menu">
+                        <!-- Dashboard Link -->
                         <li>
-                            <a href="dashboardclerk.html" class="flex items-center gap-4 px-4 py-3 bg-white text-[#345677] font-semibold rounded-lg shadow">
+                            <a href="#dashboard-top" class="nav-link flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                                 <span>Dashboard</span>
                             </a>
                         </li>
                         <!-- Manage User Link -->
                         <li class="mt-2">
-                            <a href="manage-user.html" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
+                            <a href="#manage-user" class="nav-link flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                 <span>Manage User</span>
                             </a>
                         </li>
                         <!-- Manage Book Link -->
                         <li class="mt-2">
-                            <a href="book-management.html" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
+                            <a href="#manage-book" class="nav-link flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
                                 <span>Manage Book</span>
                             </a>
                         </li>
                         <!-- Wishlist Overview Link -->
                         <li class="mt-2">
-                            <a href="wishlist-review.html" class="flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
+                            <a href="#wishlist-review" class="nav-link flex items-center gap-4 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                                 <span>Wishlist Overview</span>
                             </a>
@@ -89,7 +103,7 @@
         <!-- ===== Content Area Start ===== -->
         <main class="flex-1 p-8 overflow-y-auto">
             <!-- Stat Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div id="dashboard-top" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Card 1: New Sign Up -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm h-40 flex flex-col justify-between">
                     <h3 class="text-lg font-semibold text-[#345677]">New Sign Up</h3>
@@ -117,16 +131,16 @@
                         <div>
                             <p class="text-5xl font-bold text-gray-800">350</p>
                         </div>
-                        <img src="../assets/booksadded.png" alt="Books Added Icon" class="h-20 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x100/345677/FFFFFF?text=Img';">
+                        <img src="../assets/booksadded.png" alt="Books Added Icon" class="h-24 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x100/345677/FFFFFF?text=Img';">
                     </div>
                 </div>
             </div>
 
             <!-- Manage User Section -->
-            <div class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
+            <div id="manage-user" class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-gray-800">Manage User</h2>
-                    <button class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</button>
+                    <a href="manage-user.html" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</a>
                 </div>
                 <!-- Placeholder for user list -->
                 <div class="text-center text-gray-400 py-16">
@@ -135,10 +149,10 @@
             </div>
 
             <!-- Manage Book Section -->
-            <div class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
+            <div id="manage-book" class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-gray-800">Manage Book</h2>
-                    <button class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</button>
+                    <a href="book-management.html" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</a>
                 </div>
                 <!-- Placeholder for book list -->
                 <div class="text-center text-gray-400 py-16">
@@ -147,10 +161,10 @@
             </div>
 
             <!-- Wishlist Review Section -->
-            <div class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
+            <div id="wishlist-review" class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-gray-800">Wishlist Review</h2>
-                    <button class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</button>
+                    <a href="wishlist-review.html" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</a>
                 </div>
                 <!-- Placeholder for wishlist review -->
                 <div class="text-center text-gray-400 py-16">
@@ -160,6 +174,63 @@
         </main>
         <!-- ===== Content Area End ===== -->
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainContent = document.querySelector('main');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main > div[id]');
+
+            // Function for smooth scrolling
+            function smoothScroll(targetId) {
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    const topOffset = targetElement.offsetTop - 32; // 32px = p-8 from main
+                    mainContent.scrollTo({
+                        top: topOffset,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            
+            // Add click listeners to nav links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if(targetId.startsWith("#")) {
+                        e.preventDefault();
+                        smoothScroll(targetId.substring(1));
+                    }
+                });
+            });
+
+            // Function to update active nav link based on scroll position
+            function updateActiveLink() {
+                let currentSectionId = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 40; // a small offset
+                    if (mainContent.scrollTop >= sectionTop) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    const linkHref = link.getAttribute('href');
+                    if (linkHref === `#${currentSectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Listen for scroll events on the main content area
+            mainContent.addEventListener('scroll', updateActiveLink);
+            
+            // Set the initial active link
+            updateActiveLink();
+        });
+    </script>
 
 </body>
 </html>
