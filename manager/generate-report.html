@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Report</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter (sans-serif) and Playfair Display (serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="css/style-manager.css">
+</head>
+<body class="management-page">
+
+    <!-- Header -->
+    <header id="page-header" class="bg-[#345677] text-white p-4 flex justify-between items-center shadow-md">
+        <div class="flex items-center gap-3">
+            <div class="bg-white p-2 rounded-md">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#345677" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            </div>
+            <h1 class="font-serif-display text-2xl">MENORA</h1>
+        </div>
+        <h2 class="text-2xl font-bold uppercase tracking-wider">Generate Report</h2>
+        <a href="dashboardmanager.html" class="text-white hover:text-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="p-8">
+        <div id="report-container" class="bg-white/90 p-6 rounded-2xl shadow-lg">
+            <!-- Filter Section -->
+            <div id="filter-section" class="flex flex-wrap items-center gap-4 mb-6">
+                <div>
+                    <label for="report-type" class="block text-sm font-medium text-gray-700">Report Type</label>
+                    <select id="report-type" name="report-type" class="mt-1 block w-48 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-[#345677] focus:border-[#345677] sm:text-sm rounded-md">
+                        <option value="user">User</option>
+                        <option value="book">Book</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- User Report Table (Visible by default) -->
+            <div id="user-report" class="overflow-x-auto">
+                 <h3 class="text-xl font-bold text-gray-800 mb-4">User Report</h3>
+                <table class="min-w-full table-fixed">
+                    <thead>
+                        <tr class="bg-gray-200/90">
+                            <th class="w-1/5 text-left py-3 px-4 font-semibold text-gray-700">ID</th>
+                            <th class="w-1/5 text-left py-3 px-4 font-semibold text-gray-700">Name</th>
+                            <th class="w-1/5 text-left py-3 px-4 font-semibold text-gray-700">Email</th>
+                            <th class="w-1/5 text-left py-3 px-4 font-semibold text-gray-700">Role</th>
+                            <th class="w-1/5 text-left py-3 px-4 font-semibold text-gray-700">Created At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4">123</td>
+                            <td class="py-3 px-4">Suhana Rahim</td>
+                            <td class="py-3 px-4">shnrhm@gmail.com</td>
+                            <td class="py-3 px-4">Clerk</td>
+                            <td class="py-3 px-4">25/6/2025</td>
+                        </tr>
+                         <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4">124</td>
+                            <td class="py-3 px-4">Iman Mysarah</td>
+                            <td class="py-3 px-4">imnsrh@gmail.com</td>
+                            <td class="py-3 px-4">Reader</td>
+                            <td class="py-3 px-4">15/6/2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Book Report Table (Hidden by default) -->
+            <div id="book-report" class="overflow-x-auto hidden">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Book Report</h3>
+                <table class="min-w-full table-fixed">
+                    <thead>
+                        <tr class="bg-gray-200/90">
+                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Book ID</th>
+                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Title</th>
+                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Author</th>
+                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Publisher</th>
+                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Genre</th>
+                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Page Number</th>
+                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Year Published</th>
+                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4">BK-001</td>
+                            <td class="py-3 px-4">Hey Mr Crush</td>
+                            <td class="py-3 px-4">Zati Mohamed</td>
+                            <td class="py-3 px-4">Kejou Book Pub.</td>
+                            <td class="py-3 px-4">Romance</td>
+                            <td class="py-3 px-4">250</td>
+                            <td class="py-3 px-4">2023</td>
+                            <td class="py-3 px-4">$12.99</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Print Button -->
+            <div class="text-right mt-6">
+                <button id="print-button" class="bg-green-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-600 transition-colors">Print</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const reportTypeSelect = document.getElementById('report-type');
+            const userReport = document.getElementById('user-report');
+            const bookReport = document.getElementById('book-report');
+            const printButton = document.getElementById('print-button');
+
+            // --- Event listener for the dropdown ---
+            reportTypeSelect.addEventListener('change', function() {
+                if (this.value === 'user') {
+                    userReport.classList.remove('hidden');
+                    bookReport.classList.add('hidden');
+                } else if (this.value === 'book') {
+                    userReport.classList.add('hidden');
+                    bookReport.classList.remove('hidden');
+                }
+            });
+
+            // --- Event listener for the print button ---
+            printButton.addEventListener('click', function() {
+                window.print();
+            });
+        });
+    </script>
+
+</body>
+</html>

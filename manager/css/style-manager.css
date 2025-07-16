@@ -1,9 +1,44 @@
 /* Custom font-family utilities */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f3f4f6; /* A light grey background for the main content area */
+    background-color: #f3f4f6; /* A light grey background for the dashboard */
 }
 
 .font-serif-display {
     font-family: 'Playfair Display', serif;
+}
+
+/* Styles for the Management pages */
+.management-page {
+    /* You can add a background image for the manager's management pages here */
+    background-image: url('../assets/managerbackground.jpg'); /* Example path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #e5e7eb; /* Fallback color */
+}
+
+/* --- Print Styles --- */
+@media print {
+    /* Hide elements that shouldn't be printed */
+    body.management-page {
+        background-image: none !important;
+        background-color: #ffffff !important;
+    }
+
+    #page-header, #filter-section, #print-button {
+        display: none !important;
+    }
+
+    /* Ensure the report container takes up the full width */
+    main.p-8 {
+        padding: 0 !important;
+    }
+
+    #report-container {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+    }
 }
