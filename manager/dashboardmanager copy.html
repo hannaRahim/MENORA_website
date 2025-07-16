@@ -18,12 +18,6 @@
 
     <style>
         html { scroll-behavior: smooth; }
-        /* Custom style for preview tables */
-        .preview-table { width: 100%; border-collapse: collapse; }
-        .preview-table th, .preview-table td { text-align: left; padding: 12px 8px; border-bottom: 1px solid #e5e7eb; }
-        .preview-table th { font-weight: 600; color: #374151; font-size: 0.875rem; }
-        .preview-table td { color: #4b5563; }
-        .preview-table tr:last-child td { border-bottom: none; }
     </style>
 
 </head>
@@ -96,27 +90,27 @@
                 </div>
             </div>
 
-            <!-- Sections for Previews -->
+            <!-- Sections for Manage Clerk, User Activity, etc. remain the same -->
             <div id="manage-clerk-preview" class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-gray-800">Manage Clerk</h2>
                     <a href="./manage-clerk.html" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</a>
                 </div>
-                <div id="clerk-preview-content" class="text-center text-gray-400 py-16"><p>Loading clerk data...</p></div>
+                <div class="text-center text-gray-400 py-16"><p>Clerk management tools will be displayed here.</p></div>
             </div>
             <div id="user-activity-preview" class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-bold text-gray-800">Recent User Activity</h2>
+                    <h2 class="text-xl font-bold text-gray-800">User Activity Log</h2>
                     <a href="./user-activity.html" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</a>
                 </div>
-                <div id="activity-preview-content" class="text-center text-gray-400 py-16"><p>Loading user activity...</p></div>
+                <div class="text-center text-gray-400 py-16"><p>User activity data will be displayed here.</p></div>
             </div>
             <div id="generate-report-preview" class="mt-10 bg-white p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-gray-800">Generate Report</h2>
                     <a href="./generate-report.html" class="bg-[#345677] text-white px-5 py-2 rounded-lg font-semibold hover:bg-[#2c4863] transition-colors">View All</a>
                 </div>
-                <div class="text-gray-600 py-4"><p>Click 'View All' to generate and print detailed reports on all users and books in the library system.</p></div>
+                <div class="text-center text-gray-400 py-16"><p>Report generation options will be displayed here.</p></div>
             </div>
         </main>
         <!-- ===== Content Area End ===== -->
@@ -126,14 +120,14 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <!-- Custom Supabase Manager Script -->
-    <script src="manager-script.js"></script>
+    <script src="supabase-manager.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             // Check for logged in user
             const userString = localStorage.getItem('loggedInUser');
             if (!userString) {
-                window.location.href = './loginmanager.html';
+                window.location.href = './loginmanager.html'; // CORRECTED PATH
                 return;
             }
             const user = JSON.parse(userString);
@@ -151,43 +145,11 @@
                 </div>
             `;
 
-            // --- 1. Fetch and display dashboard STATS ---
+            // Fetch and display dashboard stats
             const stats = await getDashboardStats();
             document.getElementById('new-sign-ups').textContent = stats.newSignUps;
             document.getElementById('active-readers').textContent = stats.activeReaders;
             document.getElementById('books-added').textContent = stats.booksAdded;
-
-            // --- 2. Fetch and display CLERK PREVIEW ---
-            const clerkPreviewContainer = document.getElementById('clerk-preview-content');
-            const clerks = await getClerksPreview(4); // Get top 4 clerks
-            if (clerks.length > 0) {
-                let clerkHtml = '<table class="preview-table"><thead><tr><th>Name</th><th>Email</th></tr></thead><tbody>';
-                clerks.forEach(clerk => {
-                    clerkHtml += `<tr><td>${clerk.name || 'N/A'}</td><td>${clerk.email}</td></tr>`;
-                });
-                clerkHtml += '</tbody></table>';
-                clerkPreviewContainer.innerHTML = clerkHtml;
-            } else {
-                clerkPreviewContainer.innerHTML = '<p class="text-center text-gray-500 py-10">No clerks found.</p>';
-            }
-
-            // --- 3. Fetch and display ACTIVITY PREVIEW ---
-            const activityPreviewContainer = document.getElementById('activity-preview-content');
-            const activities = await getUserActivityPreview(4); // Get last 4 activities
-            if (activities.length > 0) {
-                let activityHtml = '<table class="preview-table"><thead><tr><th>Name</th><th>Role</th><th>Sign Up Date</th></tr></thead><tbody>';
-                activities.forEach(activity => {
-                    activityHtml += `<tr>
-                        <td>${activity.name || 'N/A'}</td>
-                        <td class="capitalize">${activity.role}</td>
-                        <td>${new Date(activity.created_at).toLocaleDateString()}</td>
-                    </tr>`;
-                });
-                activityHtml += '</tbody></table>';
-                activityPreviewContainer.innerHTML = activityHtml;
-            } else {
-                activityPreviewContainer.innerHTML = '<p class="text-center text-gray-500 py-10">No recent user activity.</p>';
-            }
 
             // Logout functionality
             document.getElementById('logout-link').addEventListener('click', (e) => {
@@ -196,6 +158,7 @@
             });
         });
     </script>
+
 
 </body>
 </html>
