@@ -56,27 +56,15 @@
         </div>
     </div>
 
-    <script>
-        // This script renders the icons (mail, lock)
-        feather.replace();
+    <!-- 
+        REMOVED the old script block from here.
+        The clerk-script.js file below will handle everything.
+    -->
 
-        // Form submission logic remains the same
-        document.querySelector('.login-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            if (email && password) {
-                console.log('Login attempt as Clerk. Redirecting to clerk dashboard...');
-                // Redirect to the clerk dashboard upon successful login
-                window.location.href = 'dashboardclerk.html';
-            } else {
-                // A simple validation message
-                alert('Please fill in both email and password.');
-            }
-        });
-    </script>
+    <!-- Add Supabase library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Add your custom script -->
+    <script src="js/clerk-script.js"></script>
 
 </body>
 </html>
