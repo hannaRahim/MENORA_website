@@ -1,139 +1,184 @@
 /*
- * --------------------------------------------------------------------
- * Supabase Manager Script
- * --------------------------------------------------------------------
- * This script handles all interactions with the Supabase database
- * for the manager-specific pages of the Menora application.
+ * =============================================================================
+ * Supabase Manager Script (manager-script.js)
+ * =============================================================================
+ * Description: This script handles all the client-side interactions with the
+ * Supabase database for the Manager role. It includes functions
+ * for authentication, data fetching for dashboards, reports,
+ * and management of other user roles.
  *
- * It includes functions for:
- * - Authentication (Login, Logout)
- * - Fetching dashboard statistics
- * - Managing clerk accounts
- * - Generating user and book reports
- * - Fetching user activity logs
- * --------------------------------------------------------------------
+ * Instructions:
+ * 1. Replace the placeholder Supabase URL and Anon Key with your actual
+ * project credentials.
+ * 2. Ensure this script is included in all your manager-facing HTML pages.
+ * 3. The login function here uses Supabase Auth. You should adapt your
+ * loginmanager.html to use this `login` function instead of the
+ * hardcoded credentials for a secure application.
+ * =============================================================================
  */
 
-// 1. SUPABASE CLIENT INITIALIZATION
-// --------------------------------------------------------------------
-// !! IMPORTANT !!
-// YOU MUST REPLACE THESE VALUES WITH YOUR OWN SUPABASE PROJECT DETAILS
-// Get these from your Supabase Project Settings > API
-const SUPABASE_URL = 'https://gnjjqhchzmcwhoelugen.supabase.co'; 
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImduampxaGNoem1jd2hvZWx1Z2VuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI0MTM1MDAsImV4cCI6MjA2Nzk4OTUwMH0.U9fzz-njmirRZBGhYmdxj9gPWvIS_srS6vvBf2_5g20'; 
-
-// Create a single Supabase client for interacting with your database
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// --- 1. SUPABASE INITIALIZATION ---
+// Replace with your actual Supabase project URL and Anon Key.
+const supabaseUrl = 'https://gnjjqhchzmcwhoelugen.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImduampxaGNoem1jd2hvZWx1Z2VuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI0MTM1MDAsImV4cCI6MjA2Nzk4OTUwMH0.U9fzz-njmirRZBGhYmdxj9gPWvIS_srS6vvBf2_5g20';
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 
-// --------------------------------------------------------------------
-// 2. AUTHENTICATION FUNCTIONS
-// --------------------------------------------------------------------
+// --- 2. AUTHENTICATION & SESSION MANAGEMENT ---
 
 /**
- * Logs in a user and verifies they have the 'manager' role.
+ * Logs in a user with email and password and verifies their role is 'manager'.
  * @param {string} email - The user's email.
  * @param {string} password - The user's password.
  * @returns {object|null} The user object if login is successful and role is correct, otherwise null.
  */
-async function loginManager(email, password) {
+async function login(email, password) {
     try {
-        // Query the 'users' table using email and password
-        const { data: userData, error } = await supabase
-            .from('users')
-            .select('id, name, email, role')
-            .eq('email', email)
-            .eq('password', password) // ⚠️ assuming plain text password
-            .single(); // We expect only one user
+        const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password,
+        });
 
-        if (error) {
-            console.error('Login error:', error.message);
+        if (authError) {
+            console.error('Authentication error:', authError.message);
             return null;
         }
 
-        // Check if user is a manager
-        if (userData && userData.role.toLowerCase() === 'manager') {
-            console.log('Manager login successful:', userData);
+        if (!authData.user) {
+            console.error('Login failed: No user data returned.');
+            return null;
+        }
+
+        const { data: userData, error: userError } = await supabase
+            .from('users')
+            .select('id, name, email, role')
+            .eq('id', authData.user.id)
+            .single();
+
+        if (userError) {
+            console.error('Error fetching user role:', userError.message);
+            await logout();
+            return null;
+        }
+
+        if (userData && userData.role === 'manager') {
+            console.log('Manager login successful.');
             localStorage.setItem('loggedInUser', JSON.stringify(userData));
             return userData;
         } else {
-            console.warn('User is not a manager.');
+            console.warn('Login attempt by non-manager user or user not found.');
+            await logout();
             return null;
         }
     } catch (error) {
-        console.error('Unexpected error during login:', error.message);
+        console.error('An unexpected error occurred during login:', error.message);
         return null;
     }
 }
 
 /**
- * Logs the current user out.
+ * Logs out the current user, clears session data, and redirects to the login page.
  */
 async function logout() {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-        console.error('Logout Error:', error.message);
-    }
-    // Clear user data from localStorage and redirect to login page
+    await supabase.auth.signOut();
     localStorage.removeItem('loggedInUser');
-    window.location.href = "./loginmanager.html";
+    window.location.href = './loginmanager.html';
 }
 
 
-// --------------------------------------------------------------------
-// 3. DASHBOARD FUNCTIONS (`dashboardmanager.html`)
-// --------------------------------------------------------------------
+// --- 3. DASHBOARD STATISTICS & PREVIEWS ---
 
 /**
- * Fetches statistics for the manager dashboard.
- * @returns {object} An object containing dashboard stats.
+ * Fetches statistics for the manager dashboard cards.
+ * @returns {object} An object containing stats for newSignUps, activeReaders, and booksAdded.
  */
 async function getDashboardStats() {
     try {
-        // Get the date 7 days ago to count "new" sign-ups
-        const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
-        // Fetch all data in parallel for efficiency
-        const [newSignUps, activeReaders, booksAdded] = await Promise.all([
-            // a) Count users created in the last 7 days
-            supabase.from('users').select('id', { count: 'exact' }).gte('created_at', sevenDaysAgo),
-            // b) Count distinct users with 'reading' status
-            supabase.from('reading_progress').select('user_id', { count: 'exact', head: true }).eq('status', 'reading'),
-            // c) Count all books in the ebook table
-            supabase.from('ebook').select('ebook_id', { count: 'exact', head: true })
-        ]);
+        const { count: newSignUps, error: signUpsError } = await supabase
+            .from('users')
+            .select('*', { count: 'exact', head: true })
+            .gte('created_at', thirtyDaysAgo.toISOString());
+        if (signUpsError) console.error("Error fetching new sign-ups:", signUpsError.message);
 
-        if (newSignUps.error) console.error("Error fetching new sign-ups:", newSignUps.error.message);
-        if (activeReaders.error) console.error("Error fetching active readers:", activeReaders.error.message);
-        if (booksAdded.error) console.error("Error fetching book count:", booksAdded.error.message);
+        const { data: activeReadersData, error: readersError } = await supabase
+            .from('reading_progress')
+            .select('user_id', { count: 'exact' })
+            .eq('status', 'reading');
+        if (readersError) console.error("Error fetching active readers:", readersError.message);
+        const activeReaders = new Set(activeReadersData.map(p => p.user_id)).size;
+
+        const { count: booksAdded, error: booksError } = await supabase
+            .from('ebook')
+            .select('*', { count: 'exact', head: true });
+        if (booksError) console.error("Error fetching book count:", booksError.message);
 
         return {
-            newSignUps: newSignUps.count ?? 0,
-            activeReaders: activeReaders.count ?? 0,
-            booksAdded: booksAdded.count ?? 0,
+            newSignUps: newSignUps || 0,
+            activeReaders: activeReaders || 0,
+            booksAdded: booksAdded || 0,
         };
     } catch (error) {
-        console.error('Failed to fetch dashboard stats:', error.message);
+        console.error('Error fetching dashboard stats:', error.message);
         return { newSignUps: 0, activeReaders: 0, booksAdded: 0 };
     }
 }
 
+/**
+ * Fetches a limited list of clerks for the dashboard preview.
+ * @param {number} limit - The number of clerks to fetch.
+ * @returns {Array} An array of clerk user objects.
+ */
+async function getClerksPreview(limit = 4) {
+    try {
+        const { data, error } = await supabase
+            .from('users')
+            .select('name, email')
+            .eq('role', 'clerk')
+            .limit(limit);
+        if (error) throw error;
+        return data;
+    } catch (error) {
+        console.error('Error fetching clerks preview:', error.message);
+        return [];
+    }
+}
 
-// --------------------------------------------------------------------
-// 4. CLERK MANAGEMENT FUNCTIONS (`manage-clerk.html`)
-// --------------------------------------------------------------------
+/**
+ * Fetches the latest user activity for the dashboard preview.
+ * @param {number} limit - The number of activities to fetch.
+ * @returns {Array} An array of the latest user activities.
+ */
+async function getUserActivityPreview(limit = 4) {
+    try {
+        const { data, error } = await supabase
+            .from('users')
+            .select('name, role, created_at')
+            .order('created_at', { ascending: false })
+            .limit(limit);
+        if (error) throw error;
+        return data;
+    } catch (error) {
+        console.error('Error fetching user activity preview:', error.message);
+        return [];
+    }
+}
+
+
+// --- 4. CLERK MANAGEMENT ---
 
 /**
  * Fetches all users with the 'clerk' role.
- * @returns {Array} A list of clerk users.
+ * @returns {Array} An array of clerk user objects.
  */
 async function getClerks() {
     try {
         const { data, error } = await supabase
             .from('users')
             .select('id, name, email, created_at')
-            .eq('role', 'clerk')
-            .order('created_at', { ascending: false });
+            .eq('role', 'clerk');
 
         if (error) {
             console.error('Error fetching clerks:', error.message);
@@ -147,117 +192,103 @@ async function getClerks() {
 }
 
 /**
- * Deletes a clerk user.
- * NOTE: This requires admin privileges and should be handled with care.
- * Deleting a user can have cascading effects on related data.
- * It's often safer to "deactivate" a user than to delete them.
+ * Deletes a clerk by their ID.
  * @param {string} clerkId - The UUID of the clerk to delete.
  * @returns {boolean} True if deletion was successful, otherwise false.
  */
 async function deleteClerk(clerkId) {
     try {
-        // To delete a user, you need to use the admin client.
-        // This function assumes the manager has the necessary rights.
-        // In a real-world scenario, you would call a secure Edge Function (RPC)
-        // that performs this action after verifying permissions.
-        const { data, error } = await supabase.auth.admin.deleteUser(clerkId);
+        const { error } = await supabase
+            .from('users')
+            .delete()
+            .eq('id', clerkId);
 
         if (error) {
             console.error('Error deleting clerk:', error.message);
-            alert(`Error: ${error.message}`); // Provide feedback to the UI
+            alert(`Failed to delete clerk. Reason: ${error.message}`);
             return false;
         }
-        console.log('Clerk deleted successfully:', data);
+        console.log(`Clerk with ID ${clerkId} deleted successfully.`);
         return true;
     } catch (error) {
-        console.error('An unexpected error occurred while deleting a clerk:', error.message);
-        alert('An unexpected error occurred. See console for details.');
+        console.error('An unexpected error occurred during clerk deletion:', error.message);
         return false;
     }
 }
 
 
-// --------------------------------------------------------------------
-// 5. REPORTING FUNCTIONS (`generate-report.html`)
-// --------------------------------------------------------------------
+// --- 5. USER ACTIVITY & REPORTS ---
 
 /**
- * Fetches all users for generating a report.
- * @returns {Array} A list of all users.
+ * Fetches user activity based on provided filters.
+ * @param {object} filters - An object containing role, startDate, and endDate.
+ * @returns {Array} An array of user objects matching the filters.
  */
-async function getUsersReport() {
+async function getUserActivity(filters) {
     try {
-        const { data, error } = await supabase
-            .from('users')
-            .select('*')
-            .order('created_at', { ascending: false });
+        let query = supabase.from('users').select('name, email, role, created_at');
 
-        if (error) throw error;
-        return data;
-    } catch (error) {
-        console.error('Error fetching users for report:', error.message);
-        return [];
-    }
-}
-
-/**
- * Fetches all books for generating a report.
- * @returns {Array} A list of all books.
- */
-async function getBooksReport() {
-    try {
-        const { data, error } = await supabase
-            .from('ebook')
-            .select('*')
-            .order('year_published', { ascending: false });
-
-        if (error) throw error;
-        return data;
-    } catch (error) {
-        console.error('Error fetching books for report:', error.message);
-        return [];
-    }
-}
-
-// --------------------------------------------------------------------
-// 6. USER ACTIVITY FUNCTIONS (`user-activity.html`)
-// --------------------------------------------------------------------
-
-/**
- * Fetches user activity data based on filters.
- * For this example, we'll just fetch user sign-up data.
- * A real implementation could join multiple tables (reviews, reading_progress).
- * @param {object} filters - The filters to apply.
- * @param {string} [filters.role] - Filter by user role ('clerk', 'reader').
- * @param {string} [filters.startDate] - The start of the date range.
- * @param {string} [filters.endDate] - The end of the date range.
- * @returns {Array} A list of user activity records.
- */
-async function getUserActivity(filters = {}) {
-    try {
-        let query = supabase.from('users').select('id, name, email, role, created_at');
-
-        // Apply filters
-        if (filters.role && filters.role !== 'All') {
+        if (filters.role && filters.role.toLowerCase() !== 'all') {
             query = query.eq('role', filters.role.toLowerCase());
         }
         if (filters.startDate) {
             query = query.gte('created_at', filters.startDate);
         }
         if (filters.endDate) {
-            // Add 1 day to the end date to make it inclusive
-            const inclusiveEndDate = new Date(filters.endDate);
-            inclusiveEndDate.setDate(inclusiveEndDate.getDate() + 1);
-            query = query.lte('created_at', inclusiveEndDate.toISOString());
+            query = query.lte('created_at', filters.endDate);
         }
 
-        const { data, error } = await query.order('created_at', { ascending: false });
+        const { data, error } = await query;
 
-        if (error) throw error;
+        if (error) {
+            console.error('Error fetching user activity:', error.message);
+            return [];
+        }
         return data;
-
     } catch (error) {
-        console.error('Error fetching user activity:', error.message);
+        console.error('An unexpected error occurred while fetching user activity:', error.message);
+        return [];
+    }
+}
+
+/**
+ * Fetches a complete list of all users for reporting.
+ * @returns {Array} An array of all user objects.
+ */
+async function getUsersReport() {
+    try {
+        const { data, error } = await supabase
+            .from('users')
+            .select('id, name, email, role, created_at');
+
+        if (error) {
+            console.error('Error fetching users report:', error.message);
+            return [];
+        }
+        return data;
+    } catch (error) {
+        console.error('An unexpected error occurred while fetching the users report:', error.message);
+        return [];
+    }
+}
+
+/**
+ * Fetches a complete list of all books for reporting.
+ * @returns {Array} An array of all book objects.
+ */
+async function getBooksReport() {
+    try {
+        const { data, error } = await supabase
+            .from('ebook')
+            .select('*');
+
+        if (error) {
+            console.error('Error fetching books report:', error.message);
+            return [];
+        }
+        return data;
+    } catch (error) {
+        console.error('An unexpected error occurred while fetching the books report:', error.message);
         return [];
     }
 }

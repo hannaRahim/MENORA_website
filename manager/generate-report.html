@@ -15,11 +15,21 @@
 
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="css/style-manager.css">
+    <style>
+        /* Styles for printing */
+        @media print {
+            body * { visibility: hidden; }
+            .print-area, .print-area * { visibility: visible; }
+            .print-area { position: absolute; left: 0; top: 0; width: 100%; }
+            .no-print { display: none; }
+            #pagination-controls { display: none; } /* Hide pagination on print */
+        }
+    </style>
 </head>
 <body class="management-page">
 
     <!-- Header -->
-    <header id="page-header" class="bg-[#345677] text-white p-4 flex justify-between items-center shadow-md">
+    <header class="bg-[#345677] text-white p-4 flex justify-between items-center shadow-md no-print">
         <div class="flex items-center gap-3">
             <div class="bg-white p-2 rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#345677" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
@@ -27,16 +37,16 @@
             <h1 class="font-serif-display text-2xl">MENORA</h1>
         </div>
         <h2 class="text-2xl font-bold uppercase tracking-wider">Generate Report</h2>
-        <a href="dashboardmanager.html" class="text-white hover:text-gray-200">
+        <a href="./dashboardmanager.html" class="text-white hover:text-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
         </a>
     </header>
 
     <!-- Main Content -->
     <main class="p-8">
-        <div id="report-container" class="bg-white/90 p-6 rounded-2xl shadow-lg">
+        <div class="bg-white/90 p-6 rounded-2xl shadow-lg print-area">
             <!-- Filter Section -->
-            <div id="filter-section" class="flex flex-wrap items-center gap-4 mb-6">
+            <div class="flex flex-wrap items-center gap-4 mb-6 no-print">
                 <div>
                     <label for="report-type" class="block text-sm font-medium text-gray-700">Report Type</label>
                     <select id="report-type" name="report-type" class="mt-1 block w-48 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-[#345677] focus:border-[#345677] sm:text-sm rounded-md">
@@ -49,14 +59,14 @@
             <!-- User Report Table (Visible by default) -->
             <div id="user-report" class="overflow-x-auto">
                  <h3 class="text-xl font-bold text-gray-800 mb-4">User Report</h3>
-                <table class="min-w-full table-fixed">
+                <table class="min-w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200/90">
-                            <th class="w-1/5 text-left py-3 px-4 font-semibold text-gray-700">ID</th>
-                            <th class="w-1/5 text-left py-3 px-4 font-semibold text-gray-700">Name</th>
-                            <th class="w-1/5 text-left py-3 px-4 font-semibold text-gray-700">Email</th>
-                            <th class="w-1/5 text-left py-3 px-4 font-semibold text-gray-700">Role</th>
-                            <th class="w-1/5 text-left py-3 px-4 font-semibold text-gray-700">Created At</th>
+                            <th class="w-1/12 text-left py-3 px-4 font-semibold text-gray-700">No.</th>
+                            <th class="w-1/4 text-left py-3 px-4 font-semibold text-gray-700">Name</th>
+                            <th class="w-1/4 text-left py-3 px-4 font-semibold text-gray-700">Email</th>
+                            <th class="w-1/4 text-left py-3 px-4 font-semibold text-gray-700">Role</th>
+                            <th class="w-1/4 text-left py-3 px-4 font-semibold text-gray-700">Created At</th>
                         </tr>
                     </thead>
                     <tbody id="user-report-body">
@@ -68,17 +78,16 @@
             <!-- Book Report Table (Hidden by default) -->
             <div id="book-report" class="overflow-x-auto hidden">
                 <h3 class="text-xl font-bold text-gray-800 mb-4">Book Report</h3>
-                <table class="min-w-full table-fixed">
+                <table class="min-w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200/90">
-                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Book ID</th>
-                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Title</th>
-                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Author</th>
-                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Publisher</th>
-                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Genre</th>
-                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Page Number</th>
-                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Year Published</th>
-                            <th class="w-1/8 text-left py-3 px-4 font-semibold text-gray-700">Price</th>
+                            <th class="w-1/12 text-left py-3 px-4 font-semibold text-gray-700">No.</th>
+                            <th class="w-1/6 text-left py-3 px-4 font-semibold text-gray-700">Title</th>
+                            <th class="w-1/6 text-left py-3 px-4 font-semibold text-gray-700">Author</th>
+                            <th class="w-1/6 text-left py-3 px-4 font-semibold text-gray-700">Genre</th>
+                            <th class="w-1/6 text-left py-3 px-4 font-semibold text-gray-700">Publisher</th>
+                            <th class="w-1/12 text-left py-3 px-4 font-semibold text-gray-700">Year</th>
+                            <th class="w-1/12 text-left py-3 px-4 font-semibold text-gray-700">Pages</th>
                         </tr>
                     </thead>
                     <tbody id="book-report-body">
@@ -87,103 +96,217 @@
                 </table>
             </div>
             
-            <!-- Print Button -->
-            <div class="text-right mt-6">
+            <!-- Pagination and Print Controls -->
+            <div class="mt-6 flex justify-between items-center no-print">
+                <div id="pagination-controls" class="flex items-center gap-2">
+                    <button id="prev-page-btn" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 disabled:opacity-50 disabled:cursor-not-allowed">&lt; Previous</button>
+                    <span id="page-info" class="text-sm font-medium text-gray-700">Page 1 of X</span>
+                    <button id="next-page-btn" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 disabled:opacity-50 disabled:cursor-not-allowed">Next &gt;</button>
+                </div>
                 <button id="print-button" class="bg-green-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-600 transition-colors">Print</button>
             </div>
         </div>
     </main>
 
-    <!-- Supabase Client Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <!-- Custom Supabase Manager Script -->
-    <script src="supabase-manager.js"></script>
-
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
+        document.addEventListener('DOMContentLoaded', () => {
             // Check for logged in user
             if (!localStorage.getItem('loggedInUser')) {
                 window.location.href = './loginmanager.html';
                 return;
             }
 
+            // --- DATA ---
+            const mockUsers = [
+                { name: 'Aina Zahra', email: 'aina.zahra01@example.com', role: 'clerk', created_at: '2025-06-02' },
+                { name: 'Ikhwan Zulkifli', email: 'ikhwan.zul@example.com', role: 'clerk', created_at: '2025-06-04' },
+                { name: 'Syafiq Roslan', email: 'syafiq.roslan@example.com', role: 'clerk', created_at: '2025-06-05' },
+                { name: 'Wani Nabilah', email: 'wani.nabilah@example.com', role: 'clerk', created_at: '2025-06-06' },
+                { name: 'Khairul Amir', email: 'khairul.amir@example.com', role: 'clerk', created_at: '2025-06-08' },
+                { name: 'Aisyah Hana', email: 'aisyah.hana@example.com', role: 'clerk', created_at: '2025-06-09' },
+                { name: 'Faiz Rahimi', email: 'faiz.rahimi@example.com', role: 'clerk', created_at: '2025-06-10' },
+                { name: 'Liyana Aziz', email: 'liyana.aziz@example.com', role: 'clerk', created_at: '2025-06-12' },
+                { name: 'Adam Zafran', email: 'adam.zafran@example.com', role: 'clerk', created_at: '2025-06-13' },
+                { name: 'Zulaikha Syahirah', email: 'zulaikha.syahirah@example.com', role: 'clerk', created_at: '2025-06-14' },
+                { name: 'Hakim Azim', email: 'hakim.azim@example.com', role: 'clerk', created_at: '2025-06-15' },
+                { name: 'Nor Afiqah', email: 'nor.afiqah@example.com', role: 'clerk', created_at: '2025-06-17' },
+                { name: 'Irfan Danish', email: 'irfan.danish@example.com', role: 'clerk', created_at: '2025-06-20' },
+                { name: 'Syazwani Huda', email: 'syazwani.huda@example.com', role: 'clerk', created_at: '2025-06-22' },
+                { name: 'Khalish Iqmal', email: 'khalish.iqmal@example.com', role: 'clerk', created_at: '2025-06-25' },
+                { name: 'Farah Adlina', email: 'farah.adlina@example.com', role: 'reader', created_at: '2025-05-01' },
+                { name: 'Zikri Hazwan', email: 'zikri.hazwan@example.com', role: 'reader', created_at: '2025-05-03' },
+                { name: 'Nadira Sofia', email: 'nadira.sofia@example.com', role: 'reader', created_at: '2025-05-04' },
+                { name: 'Danish Faheem', email: 'danish.faheem@example.com', role: 'reader', created_at: '2025-05-05' },
+                { name: 'Nurul Alisha', email: 'nurul.alisha@example.com', role: 'reader', created_at: '2025-05-07' },
+                { name: 'Haikal Idris', email: 'haikal.idris@example.com', role: 'reader', created_at: '2025-05-09' },
+                { name: 'Siti Marissa', email: 'siti.marissa@example.com', role: 'reader', created_at: '2025-05-12' },
+                { name: 'Firdaus Azhar', email: 'firdaus.azhar@example.com', role: 'reader', created_at: '2025-05-15' },
+                { name: 'Amalina Syuhada', email: 'amalina.syuhada@example.com', role: 'reader', created_at: '2025-05-19' },
+                { name: 'Rafiq Iman', email: 'rafiq.iman@example.com', role: 'reader', created_at: '2025-05-22' }
+            ];
+            const mockBooks = [
+                { ebook_id: 1, author: 'SOPHILEA', title: 'CINTA VERSI DIA', pages: 960, price: 25, year: 2024, publisher: 'Tinta Global Enterprise', genre: 'Drama' },
+                { ebook_id: 2, author: 'FIEYZA FADLINA', title: 'EX SKANDAL SEBELAH RUMAH', pages: 1013, price: 14, year: 2025, publisher: 'FIEYZA FADLINA Publication', genre: 'Thriller' },
+                { ebook_id: 3, author: 'HASZ NINIE', title: 'SAYANG', pages: 995, price: 16, year: 2025, publisher: 'HASZ NINIE Publication', genre: 'Drama' },
+                { ebook_id: 4, author: 'ALYN', title: 'THANKS BOSS', pages: 977, price: 18, year: 2025, publisher: 'ALYN Publication', genre: 'Thriller' },
+                { ebook_id: 5, author: 'SOPHILEA', title: 'KAHWIN BFF', pages: 437, price: 23, year: 2023, publisher: 'Tinta Global Enterprise', genre: 'Thriller' },
+                { ebook_id: 6, author: 'DHEYA WANG', title: 'MY500K HUSBAND', pages: 805, price: 15, year: 2025, publisher: 'DHEYA WANG Publication', genre: 'Horror' },
+                { ebook_id: 7, author: 'SOPHILEA', title: 'KAY : BUKAN SATU MALAM', pages: 921, price: 16, year: 2024, publisher: 'Tinta Global Enterprise', genre: 'Historical' },
+                { ebook_id: 8, author: 'HASZ NINIE', title: 'TAKE CARE, TUAN', pages: 262, price: 10, year: 2025, publisher: 'HASZ NINIE Publication', genre: 'Science Fiction' },
+                { ebook_id: 9, author: 'ALYN', title: 'IKAT HATI DIA', pages: 819, price: 15, year: 2025, publisher: 'ALYN Publication', genre: 'Drama' },
+                { ebook_id: 10, author: 'FIEYZA FADLINA', title: 'CUKUP DIRINYA SAJA', pages: 1056, price: 16, year: 2024, publisher: 'FIEYZA FADLINA Publication', genre: 'Adventure' },
+                { ebook_id: 11, author: 'SOPHILEA', title: 'I LOVE YOU MORE', pages: 1037, price: 15, year: 2025, publisher: 'Tinta Global Enterprise', genre: 'Horror' },
+                { ebook_id: 12, author: 'ADNIL ZAFF', title: 'DIYA ALDRISH : PENGHUJUNG DENDAM', pages: 512, price: 10, year: 2025, publisher: 'ADNIL ZAFF Publication', genre: 'Fantasy' },
+                { ebook_id: 13, author: 'DHEYA WANG', title: 'HATI YANG TERPILIH', pages: 1071, price: 15, year: 2023, publisher: 'DHEYA WANG Publication', genre: 'Fantasy' },
+                { ebook_id: 14, author: 'ALYN', title: 'BAD LIAR', pages: 671, price: 18, year: 2024, publisher: 'ALYN Publication', genre: 'Science Fiction' },
+                { ebook_id: 15, author: 'AMMARA AYYASH', title: 'ISTERI TAK DIANGGAP', pages: 570, price: 15, year: 2025, publisher: 'AMMARA AYYASH Publication', genre: 'Thriller' },
+                { ebook_id: 16, author: 'ADNIL ZAFF', title: 'TUAN FARITH : SKANDAL TAK DIRANCANG', pages: 510, price: 22, year: 2025, publisher: 'ADNIL ZAFF Publication', genre: 'Romance' },
+                { ebook_id: 17, author: 'SOPHILEA', title: 'LAURA ARDISA', pages: 824, price: 25, year: 2025, publisher: 'Tinta Global Enterprise', genre: 'Historical' },
+                { ebook_id: 18, author: 'Zati Mohd', title: 'DEEJA FAHRI : BAHAGIA YANG KAU TUNDA', pages: 506, price: 14, year: 2024, publisher: 'Kejou Book Publication', genre: 'Romance' },
+                { ebook_id: 19, author: 'ADNIL ZAFF', title: 'UNTUK 5 HARI KAU DAN AKU', pages: 391, price: 20, year: 2025, publisher: 'ADNIL ZAFF Publication', genre: 'Comedy' },
+                { ebook_id: 20, author: 'DHEYA WANG', title: 'TUAN PENJAGA CIK KESAYANGAN', pages: 552, price: 12, year: 2025, publisher: 'DHEYA WANG Publication', genre: 'Drama' },
+                { ebook_id: 21, author: 'FIEYZA FADLINA', title: 'YANG PERNAH PERGI', pages: 944, price: 15, year: 2025, publisher: 'FIEYZA FADLINA Publication', genre: 'Horror' },
+                { ebook_id: 22, author: 'ADNIL ZAFF', title: 'PEREMPUAN YANG TERLUKA', pages: 332, price: 25, year: 2025, publisher: 'ADNIL ZAFF Publication', genre: 'Romance' },
+                { ebook_id: 23, author: 'SOPHILEA', title: 'CALON ISTERI TUAN HAIDER', pages: 925, price: 20, year: 2025, publisher: 'Tinta Global Enterprise', genre: 'Historical' },
+                { ebook_id: 24, author: 'RAISYA AZLIEY', title: 'MY BAE.. TENGKU FAHD', pages: 959, price: 18, year: 2025, publisher: 'Raisya Azliey Publication', genre: 'Mystery' },
+                { ebook_id: 25, author: 'Zati Mohd', title: 'BERDOSAKAH AKU', pages: 548, price: 15, year: 2025, publisher: 'Kejou Book Publication', genre: 'Fantasy' },
+                { ebook_id: 26, author: 'ADNIL ZAFF', title: 'KAU MASIH KUCINTAI', pages: 1020, price: 15, year: 2025, publisher: 'ADNIL ZAFF Publication', genre: 'Thriller' },
+                { ebook_id: 27, author: 'SOPHILEA', title: 'LURUHNYA CINTA DI BUMI KOREA', pages: 1090, price: 15, year: 2025, publisher: 'Tinta Global Enterprise', genre: 'Fantasy' },
+                { ebook_id: 28, author: 'HASZ NINIE', title: 'YANG MENCINTAIKU', pages: 275, price: 10, year: 2025, publisher: 'HASZ NINIE Publication', genre: 'Adventure' },
+                { ebook_id: 29, author: 'ALYN', title: 'LIZZY', pages: 584, price: 18, year: 2025, publisher: 'ALYN Publication', genre: 'Drama' },
+                { ebook_id: 30, author: 'DHEYA WANG', title: 'NOAH ALEXANDRO', pages: 688, price: 15, year: 2025, publisher: 'DHEYA WANG Publication', genre: 'Horror' },
+                { ebook_id: 31, author: 'Zati Mohd', title: 'PADA SUATU HARI', pages: 510, price: 15, year: 2024, publisher: 'Kejou Book Publication', genre: 'Romance' },
+                { ebook_id: 32, author: 'RAISYA AZLIEY', title: 'TOLONG CINTAI AKU', pages: 926, price: 20, year: 2025, publisher: 'Raisya Azliey Publication', genre: 'Comedy' },
+                { ebook_id: 33, author: 'SOPHILEA', title: 'JAUH CINTA LAGI', pages: 372, price: 15, year: 2025, publisher: 'Tinta Global Enterprise', genre: 'Mystery' },
+                { ebook_id: 34, author: 'ADNIL ZAFF', title: 'OH SEPHIA', pages: 833, price: 23, year: 2025, publisher: 'ADNIL ZAFF Publication', genre: 'Historical' },
+                { ebook_id: 35, author: 'AMMARA AYYASH', title: 'TIDAK AKAN HILANG CINTAKU', pages: 585, price: 20, year: 2025, publisher: 'AMMARA AYYASH Publication', genre: 'Romance' },
+                { ebook_id: 36, author: 'RAISYA AZLIEY', title: 'KAU YANG AKU MAHU', pages: 883, price: 15, year: 2025, publisher: 'Raisya Azliey Publication', genre: 'Comedy' },
+                { ebook_id: 37, author: 'FIEYZA FADLINA', title: 'BUNGALOVE" BUNGA CINTA', pages: 679, price: 15, year: 2025, publisher: 'FIEYZA FADLINA Publication', genre: 'Thriller' },
+                { ebook_id: 38, author: 'ALYN', title: 'BAHAGIA', pages: 952, price: 15, year: 2025, publisher: 'ALYN Publication', genre: 'Adventure' },
+                { ebook_id: 39, author: 'SOPHILEA', title: 'HELLO MR CEO', pages: 896, price: 14, year: 2024, publisher: 'Tinta Global Enterprise', genre: 'Science Fiction' },
+                { ebook_id: 40, author: 'DHEYA WANG', title: 'KEKASIH LEBARAN', pages: 442, price: 12, year: 2025, publisher: 'DHEYA WANG Publication', genre: 'Mystery' },
+                { ebook_id: 41, author: 'ADNIL ZAFF', title: 'TIKET KE NERAKA', pages: 756, price: 30, year: 2023, publisher: 'ADNIL ZAFF Publication', genre: 'Science Fiction' },
+                { ebook_id: 42, author: 'RAISYA AZLIEY', title: 'ATAS NAMA CINTA', pages: 1074, price: 15, year: 2025, publisher: 'Raisya Azliey Publication', genre: 'Historical' },
+                { ebook_id: 43, author: 'AMMARA AYYASH', title: 'CINTA PERTAMA', pages: 698, price: 14, year: 2024, publisher: 'AMMARA AYYASH Publication', genre: 'Thriller' },
+                { ebook_id: 44, author: 'FIEYZA FADLINA', title: 'PATAH HATI', pages: 743, price: 20, year: 2025, publisher: 'FIEYZA FADLINA Publication', genre: 'Drama' },
+                { ebook_id: 45, author: 'HASZ NINIE', title: 'TENTANG CINTA', pages: 891, price: 15, year: 2025, publisher: 'HASZ NINIE Publication', genre: 'Horror' },
+                { ebook_id: 46, author: 'SOPHILEA', title: 'SEKEPING HATI DIBAWA BERLARI', pages: 403, price: 15, year: 2025, publisher: 'Tinta Global Enterprise', genre: 'Romance' },
+                { ebook_id: 47, author: 'Zati Mohd', title: 'AKU BUKAN BONEKA', pages: 834, price: 18, year: 2025, publisher: 'Kejou Book Publication', genre: 'Comedy' },
+                { ebook_id: 48, author: 'ADNIL ZAFF', title: 'CINTA UNTUK MELODI', pages: 530, price: 18, year: 2025, publisher: 'ADNIL ZAFF Publication', genre: 'Horror' },
+                { ebook_id: 49, author: 'SOPHILEA', title: 'HEY MR CRUSH', pages: 1089, price: 15, year: 2025, publisher: 'Tinta Global Enterprise', genre: 'Fantasy' },
+                { ebook_id: 50, author: 'AMMARA AYYASH', title: 'HEY MR BAD GUY', pages: 568, price: 15, year: 2025, publisher: 'AMMARA AYYASH Publication', genre: 'Thriller' }
+            ];
+
+            // --- STATE MANAGEMENT ---
+            let currentPage = 1;
+            const itemsPerPage = 20;
+            let currentReportType = 'user'; // 'user' or 'book'
+            let currentData = mockUsers;
+
+            // --- DOM ELEMENTS ---
             const reportTypeSelect = document.getElementById('report-type');
             const userReport = document.getElementById('user-report');
             const bookReport = document.getElementById('book-report');
             const userReportBody = document.getElementById('user-report-body');
             const bookReportBody = document.getElementById('book-report-body');
+            const prevBtn = document.getElementById('prev-page-btn');
+            const nextBtn = document.getElementById('next-page-btn');
+            const pageInfo = document.getElementById('page-info');
             const printButton = document.getElementById('print-button');
 
-            // --- Function to load user data ---
-            const loadUserReport = async () => {
-                userReportBody.innerHTML = '<tr><td colspan="5" class="text-center py-4">Loading...</td></tr>';
-                const users = await getUsersReport();
-                userReportBody.innerHTML = '';
-                if (users.length > 0) {
-                    users.forEach(user => {
-                        const row = document.createElement('tr');
-                        row.className = 'border-b border-gray-200';
-                        row.innerHTML = `
-                            <td class="py-3 px-4">${user.id}</td>
-                            <td class="py-3 px-4">${user.name || 'N/A'}</td>
-                            <td class="py-3 px-4">${user.email}</td>
-                            <td class="py-3 px-4">${user.role}</td>
-                            <td class="py-3 px-4">${new Date(user.created_at).toLocaleDateString()}</td>
-                        `;
-                        userReportBody.appendChild(row);
+            // --- RENDERING & PAGINATION ---
+            function renderPage() {
+                const totalItems = currentData.length;
+                const totalPages = Math.ceil(totalItems / itemsPerPage);
+                
+                if(currentPage > totalPages && totalPages > 0) {
+                    currentPage = 1;
+                }
+
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const pageItems = currentData.slice(startIndex, endIndex);
+
+                if (currentReportType === 'user') {
+                    userReportBody.innerHTML = '';
+                    pageItems.forEach((user, index) => {
+                        const rowNumber = startIndex + index + 1;
+                        const row = `
+                            <tr class="border-b border-gray-200">
+                                <td class="py-2 px-4">${rowNumber}</td>
+                                <td class="py-2 px-4">${user.name}</td>
+                                <td class="py-2 px-4">${user.email}</td>
+                                <td class="py-2 px-4 capitalize">${user.role}</td>
+                                <td class="py-2 px-4">${new Date(user.created_at).toLocaleDateString('en-GB')}</td>
+                            </tr>`;
+                        userReportBody.innerHTML += row;
                     });
                 } else {
-                    userReportBody.innerHTML = '<tr><td colspan="5" class="text-center py-4">No user data found.</td></tr>';
-                }
-            };
-
-            // --- Function to load book data ---
-            const loadBookReport = async () => {
-                bookReportBody.innerHTML = '<tr><td colspan="8" class="text-center py-4">Loading...</td></tr>';
-                const books = await getBooksReport();
-                bookReportBody.innerHTML = '';
-                if (books.length > 0) {
-                    books.forEach(book => {
-                        const row = document.createElement('tr');
-                        row.className = 'border-b border-gray-200';
-                        row.innerHTML = `
-                            <td class="py-3 px-4">${book.ebook_id}</td>
-                            <td class="py-3 px-4">${book.title}</td>
-                            <td class="py-3 px-4">${book.author || 'N/A'}</td>
-                            <td class="py-3 px-4">${book.publisher || 'N/A'}</td>
-                            <td class="py-3 px-4">${book.genre || 'N/A'}</td>
-                            <td class="py-3 px-4">${book.page_number || 'N/A'}</td>
-                            <td class="py-3 px-4">${book.year_published || 'N/A'}</td>
-                            <td class="py-3 px-4">${book.price ? `$${book.price.toFixed(2)}` : 'N/A'}</td>
-                        `;
-                        bookReportBody.appendChild(row);
+                    bookReportBody.innerHTML = '';
+                    pageItems.forEach((book, index) => {
+                        const rowNumber = startIndex + index + 1;
+                        const row = `
+                            <tr class="border-b border-gray-200">
+                                <td class="py-2 px-4">${rowNumber}</td>
+                                <td class="py-2 px-4">${book.title || 'N/A'}</td>
+                                <td class="py-2 px-4">${book.author || 'N/A'}</td>
+                                <td class="py-2 px-4">${book.genre || 'N/A'}</td>
+                                <td class="py-2 px-4">${book.publisher || 'N/A'}</td>
+                                <td class="py-2 px-4">${book.year || 'N/A'}</td>
+                                <td class="py-2 px-4">${book.pages || 'N/A'}</td>
+                            </tr>`;
+                        bookReportBody.innerHTML += row;
                     });
-                } else {
-                    bookReportBody.innerHTML = '<tr><td colspan="8" class="text-center py-4">No book data found.</td></tr>';
                 }
-            };
 
-            // --- Event listener for the dropdown ---
+                // Update pagination controls
+                pageInfo.textContent = `Page ${currentPage} of ${totalPages || 1}`;
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+            }
+
+            // --- EVENT LISTENERS ---
             reportTypeSelect.addEventListener('change', function() {
+                currentReportType = this.value;
+                currentPage = 1;
                 if (this.value === 'user') {
+                    currentData = mockUsers;
                     userReport.classList.remove('hidden');
                     bookReport.classList.add('hidden');
-                    loadUserReport();
-                } else if (this.value === 'book') {
+                } else {
+                    currentData = mockBooks;
                     userReport.classList.add('hidden');
                     bookReport.classList.remove('hidden');
-                    loadBookReport();
+                }
+                renderPage();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderPage();
                 }
             });
 
-            // --- Event listener for the print button ---
+            nextBtn.addEventListener('click', () => {
+                const totalPages = Math.ceil(currentData.length / itemsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderPage();
+                }
+            });
+
             printButton.addEventListener('click', () => {
                 window.print();
             });
 
-            // --- Initial Load ---
-            await loadUserReport();
+            // --- INITIALIZATION ---
+            function initialize() {
+                currentData = mockUsers; // Start with user data
+                renderPage(); // Render the first page
+            }
+
+            initialize();
         });
     </script>
 
