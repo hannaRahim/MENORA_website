@@ -35,7 +35,7 @@
     <!-- Main Content -->
     <main class="p-8">
         <!-- Container for both sections -->
-        <div id="main-container" class="bg-white/90 p-6 rounded-2xl shadow-lg grid grid-cols-1 gap-8">
+        <div id="main-container" class="bg-white/90 p-6 rounded-2xl shadow-lg grid grid-cols-1 lg:grid-cols-1 gap-8 transition-all duration-500">
             
             <!-- Wishlist Books Section -->
             <div id="wishlist-section">
@@ -43,7 +43,7 @@
                 <!-- Scrollable container for the wishlist table -->
                 <div class="h-[calc(100vh-22rem)] overflow-y-auto border border-gray-200 rounded-lg pr-2">
                     <table class="min-w-full">
-                        <thead class="sticky top-0 bg-gray-100">
+                        <thead class="sticky top-0 bg-gray-100 z-10">
                             <tr class="border-b-2 border-gray-300">
                                 <th class="text-left py-3 px-4 font-semibold text-gray-700">Book Name</th>
                                 <th class="text-left py-3 px-4 font-semibold text-gray-700">Author</th>
@@ -51,34 +51,7 @@
                             </tr>
                         </thead>
                         <tbody id="wishlist-table-body">
-                            <!-- Data attributes are added to each row to hold book info -->
-                            <tr class="wishlist-item border-b border-gray-200 bg-white" data-title="7 Penantian" data-author="Alyn">
-                                <td class="py-3 px-4">7 Penantian</td>
-                                <td class="py-3 px-4">Alyn</td>
-                                <td class="py-3 px-4">
-                                    <button class="edit-btn text-blue-500 hover:text-blue-700">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="wishlist-item border-b border-gray-200 bg-white" data-title="The Midnight Library" data-author="Matt Haig">
-                                <td class="py-3 px-4">The Midnight Library</td>
-                                <td class="py-3 px-4">Matt Haig</td>
-                                <td class="py-3 px-4">
-                                    <button class="edit-btn text-blue-500 hover:text-blue-700">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="wishlist-item border-b border-gray-200 bg-white" data-title="Klara and the Sun" data-author="Kazuo Ishiguro">
-                                <td class="py-3 px-4">Klara and the Sun</td>
-                                <td class="py-3 px-4">Kazuo Ishiguro</td>
-                                <td class="py-3 px-4">
-                                    <button class="edit-btn text-blue-500 hover:text-blue-700">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                                    </button>
-                                </td>
-                            </tr>
+                            <!-- Wishlist items will be dynamically inserted here -->
                         </tbody>
                     </table>
                 </div>
@@ -91,31 +64,31 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label for="book-id" class="block text-sm font-medium text-gray-700">Book ID</label>
-                            <input type="text" id="book-id" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
+                            <input type="text" id="book-id" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
                         </div>
                         <div>
                             <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-                            <input type="text" id="price" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
+                            <input type="number" step="0.01" id="price" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
                         </div>
                     </div>
                     <div>
-                        <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
-                        <input type="text" id="title-input" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
+                        <label for="title-input" class="block text-sm font-medium text-gray-700">Title</label>
+                        <input type="text" id="title-input" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label for="author" class="block text-sm font-medium text-gray-700">Author</label>
+                            <label for="author-input" class="block text-sm font-medium text-gray-700">Author</label>
                             <input type="text" id="author-input" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
                         </div>
                         <div>
                             <label for="year-publish" class="block text-sm font-medium text-gray-700">Year Publish</label>
-                            <input type="text" id="year-publish" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
+                            <input type="number" id="year-publish" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
                         </div>
                     </div>
                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label for="page-number" class="block text-sm font-medium text-gray-700">Page Number</label>
-                            <input type="text" id="page-number" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
+                            <input type="number" id="page-number" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#345677] focus:border-[#345677]">
                         </div>
                         <div>
                             <label for="genre" class="block text-sm font-medium text-gray-700">Genre</label>
@@ -131,47 +104,20 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </main>
 
-    <script>
-        // --- JavaScript to handle the interaction ---
-
-        document.addEventListener('DOMContentLoaded', function () {
-            // Get all the necessary elements
-            const editButtons = document.querySelectorAll('.edit-btn');
-            const addBookSection = document.getElementById('add-book-section');
-            const mainContainer = document.getElementById('main-container');
-            
-            // Get form inputs
-            const titleInput = document.getElementById('title-input');
-            const authorInput = document.getElementById('author-input');
-
-            // Add a click event listener to each edit button
-            editButtons.forEach(button => {
-                button.addEventListener('click', function (event) {
-                    // Find the parent row of the clicked button
-                    const itemRow = event.currentTarget.closest('.wishlist-item');
-                    
-                    // Get the book data from the data attributes
-                    const title = itemRow.dataset.title;
-                    const author = itemRow.dataset.author;
-
-                    // Populate the form with the book data
-                    titleInput.value = title;
-                    authorInput.value = author;
-                    
-                    // Show the "Add book" section
-                    addBookSection.classList.remove('hidden');
-
-                    // Change the grid layout to show two columns
-                    mainContainer.classList.remove('lg:grid-cols-1');
-                    mainContainer.classList.add('lg:grid-cols-2');
-                });
-            });
-        });
-    </script>
+    <!-- Notification Modal -->
+    <div id="confirmation-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md mx-4">
+            <h3 id="modal-title" class="text-xl font-bold text-gray-900">Notification</h3>
+            <p id="modal-message" class="mt-2 text-gray-600"></p>
+            <div class="mt-6 flex justify-end gap-4">
+                <button id="modal-cancel-btn" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">Close</button>
+                <button id="modal-confirm-btn" class="hidden px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Confirm</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Add Supabase library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
