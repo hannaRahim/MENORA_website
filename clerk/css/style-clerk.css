@@ -1,24 +1,197 @@
-/* Custom font-family utilities */
+/* --- Base Styles --- */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f3f4f6; /* A light grey background for the main content area */
+    margin: 0;
+    overflow: hidden; /* Prevent scrollbars from the main layout */
 }
 
-.font-serif-display {
+/* --- Login Page Layout --- */
+.login-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+/* --- Left Panel --- */
+.left-panel {
+    flex: 1;
+    background-color: #f7f5f2; /* cream-bg: hsl(35, 25%, 96%) */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.svg-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -1px; /* Overlap slightly to prevent gaps */
+    width: 128px;
+    z-index: 10;
+}
+
+.svg-divider svg {
+    height: 100%;
+    width: 100%;
+}
+
+.left-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+}
+
+.brand-title {
     font-family: 'Playfair Display', serif;
+    font-size: 4.5rem; /* Adjusted for better fit */
+    color: #f5e67a; /* soft-yellow: hsl(45, 90%, 70%) */
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.1);
 }
 
-/* Styles for the Management pages */
+.illustration-container {
+    position: relative;
+    margin-top: 2rem;
+}
+
+.notebook-image {
+    width: 320px;
+    height: 192px;
+    object-fit: contain;
+    opacity: 0.9;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.botanical-branch {
+    position: absolute;
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    opacity: 0.7;
+    display: none; /* Hidden as no image was provided, can be enabled later */
+}
+
+.botanical-branch.top {
+    top: -1rem;
+    left: -2rem;
+    transform: rotate(12deg);
+}
+
+.botanical-branch.bottom {
+    bottom: -0.5rem;
+    right: -1.5rem;
+    width: 80px;
+    height: 80px;
+    transform: rotate(-45deg) scaleX(-1);
+}
+
+/* --- Right Panel --- */
+.right-panel {
+    flex: 1;
+    background: linear-gradient(135deg, hsl(210 35% 88%) 0%, hsl(210 25% 85%) 50%, hsl(200 30% 90%) 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.login-form-wrapper {
+    width: 100%;
+    max-width: 380px;
+    padding: 2rem;
+}
+
+/* --- Toggle Buttons --- */
+.login-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.login-toggle {
+    display: inline-flex;
+    background-color: hsl(210, 25%, 90%); /* Lighter than watercolor-blue */
+    border-radius: 9999px;
+    padding: 0.25rem;
+}
+
+.toggle-button {
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: hsl(215.4, 16.3%, 46.9%);
+    transition: all 0.3s ease;
+}
+
+.toggle-button.active {
+    background-color: #0a3d70; /* dark-blue: hsl(210, 85%, 25%) */
+    color: #f8fafc; /* primary-foreground */
+    box-shadow: 0 4px 15px -5px hsl(210 85% 25% / 0.4);
+}
+
+/* --- Form Fields --- */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.form-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #334155; /* Muted foreground */
+}
+
+.form-input {
+    margin-top: 0.25rem;
+    background-color: #f7f5f2; /* cream-bg */
+    border: 1px solid hsl(210, 25%, 85%);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: #020817;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #0a3d70;
+    box-shadow: 0 0 0 2px hsl(210 85% 25% / 0.2);
+}
+
+.submit-button {
+    background-color: #0a3d70; /* dark-blue */
+    color: #f8fafc;
+    padding: 0.75rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.submit-button:hover {
+    background-color: hsl(210, 85%, 30%);
+}
+
+/* --- Management Page Styles --- */
 .management-page {
     background-image: url('../assets/clerkbackground.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-}
-.management-header {
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-    color: white;
-    padding: 20px;
-    text-align: center;
 }

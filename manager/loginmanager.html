@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Log In - Menora</title>
+    
+    <!-- Tailwind is not strictly needed as styles are in CSS, but kept for consistency if you mix styles later -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="css/style-manager.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <!-- Left Section - Cream Background -->
+        <div class="left-panel">
+            <!-- Curved SVG Divider -->
+            <div class="svg-divider">
+                <svg class="h-full w-full" viewBox="0 0 100 800" preserveAspectRatio="none">
+                    <path d="M0 0 C50 150 50 250 0 400 C50 550 50 650 0 800 Z" fill="#dbe4f0"></path>
+                </svg>
+            </div>
+            
+            <!-- Content on the left -->
+            <div class="left-content">
+                <h1 class="brand-title">Menora</h1>
+                <div class="illustration-container">
+                    <img src="../assets/booksign.png" alt="Notebook and pencil illustration" class="notebook-image" onerror="this.onerror=null;this.src='https://placehold.co/320x192/000000/FFFFFF?text=Illustration';">
+                    <!-- Decorative botanical branches -->
+                    <img src="https://i.imgur.com/your-botanical-branch-image.png" alt="Botanical decoration" class="botanical-branch top" onerror="this.style.display='none'">
+                    <img src="https://i.imgur.com/your-botanical-branch-image.png" alt="Botanical decoration" class="botanical-branch bottom" onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+      
+        <!-- Right Section - Watercolor Blue Background -->
+        <div class="right-panel">
+            <div class="login-form-wrapper">
+                <!-- Toggle for Staff/User -->
+                <div class="login-toggle-container">
+                    <div class="login-toggle">
+                        <a href="#" class="toggle-button active">Staff</a>
+                        <a href="loginclerk.html" class="toggle-button">User</a>
+                    </div>
+                </div>
+                
+                <!-- Login Form -->
+                <form class="login-form">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input id="email" type="email" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input id="password" type="password" class="form-input" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="submit-button">Log In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
